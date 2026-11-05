@@ -61,7 +61,7 @@
 
 <body class="neon-background min-h-screen flex text-slate-300 antialiased overflow-hidden">
 
-    <!-- Sidebar -->
+    <!-- Sidebar / القائمة الجانبية -->
     <aside
         class="w-64 glass-panel flex flex-col justify-between p-5 z-20 hidden md:flex shrink-0 border-l border-slate-800/60">
         <div>
@@ -82,6 +82,16 @@
                     <i class="fas fa-brain text-sky-400"></i>
                     <span>OUARRACH AI</span>
                 </a>
+                <a href="#courses"
+                    class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/40 transition">
+                    <i class="fas fa-book-open text-slate-500"></i>
+                    <span>الدروس و TD</span>
+                </a>
+                <a href="#settings"
+                    class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/40 transition">
+                    <i class="fas fa-cog text-slate-500"></i>
+                    <span>الإعدادات</span>
+                </a>
             </nav>
         </div>
 
@@ -100,20 +110,25 @@
         </div>
     </aside>
 
-    <!-- Main Workspace -->
+    <!-- Main Workspace / مساحة العمل الرئيسية -->
     <div class="flex-1 flex flex-col h-screen overflow-y-auto">
 
         <header
             class="glass-panel px-8 py-4 flex items-center justify-between sticky top-0 z-10 border-b border-slate-800/60">
             <div>
                 <h2 class="text-lg font-bold text-white tracking-tight">مُحرك OUARRACH AI الذكي</h2>
-                <p class="text-xs text-slate-400">مرتبط مباشرة بـ Gemini API لتحليل الشامل للدروس والملفات</p>
+                <p class="text-xs text-slate-400">مرتبط مباشرة بـ Gemini API للتحليل الشامل للدروس والملفات</p>
+            </div>
+            <div class="flex items-center gap-3 text-xs font-semibold">
+                <span class="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300">
+                    <i class="fas fa-user-circle text-sky-400 ml-1"></i> أيوب وراش
+                </span>
             </div>
         </header>
 
         <main class="p-8 max-w-5xl mx-auto w-full flex-1 flex flex-col justify-between">
 
-            <!-- Chat Box -->
+            <!-- Chat Box / نافذة المحادثة -->
             <div id="chatBox" class="space-y-4 max-h-[600px] overflow-y-auto pl-2 text-xs flex-1">
                 <div class="flex gap-3 items-start">
                     <div
@@ -127,7 +142,7 @@
                 </div>
             </div>
 
-            <!-- Input Bar -->
+            <!-- Input Bar / شريط إدخال الأسئلة والملفات -->
             <div class="mt-6 pt-4 border-t border-slate-800/80">
                 <div id="filePreview"
                     class="hidden mb-3 p-2 bg-slate-900/90 rounded-xl border border-sky-500/40 flex items-center justify-between text-xs text-sky-300">
@@ -164,7 +179,7 @@
     </div>
 
     <script>
-        // Key Integrated Directly
+        // مفتاح الـ API المدمج مباشرة
         const GEMINI_API_KEY = "AQ.Ab8RN6L6syxSGY2vM3pc2YBPdWyXxVjXp-enTcNFfRhMzQlR_g";
 
         pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
@@ -223,7 +238,7 @@
             if (attachedFileName) {
                 userContent = `<div class="flex items-center gap-2 mb-1"><i class="fas fa-file-pdf"></i> <strong>${attachedFileName}</strong></div>${text}`;
             }
-            userMsg.innerHTML = `<div class="bg-gradient-to-r from-sky-500 to-indigo-600 text-white p-3.5 rounded-2xl rounded-tl-none text-xs font-semibold max-w-xl shadow-lg">${userContent}</div>`;
+            userMsg.innerHTML = `<div class="bg-gradient-to-r from-sky-500 to-indigo-600 text-white p-3.5 rounded-2xl rounded-tr-none text-xs font-semibold max-w-xl shadow-lg">${userContent}</div>`;
             chatBox.appendChild(userMsg);
 
             aiInput.value = '';
@@ -240,7 +255,7 @@
             chatBox.appendChild(loadingMsg);
             chatBox.scrollTop = chatBox.scrollHeight;
 
-            let systemInstruction = "أنت مساعد ذكي مدمج في موقع OUARRACH.ME. مهمتك شرح الدروس والملفات بالتفصيل الملل وإعطاء إجابات دقيقة وكاملة.";
+            let systemInstruction = "أنت مساعد ذكي مدمج في موقع OUARRACH.ME. مهمتك شرح الدروس والملفات بالتفصيل الملل وإعطاء إجابات دقيقة وكاملة باللغة العربية.";
             let fullPrompt = text;
             if (attachedFileText) {
                 fullPrompt = `المحتوى الكامل للملف المرفق (${attachedFileName}):\n${attachedFileText}\n\nسؤال/طلب المستخدم: ${text || 'اشرح لي هذا الدرس بالتفصيل الشامل وبشكل مبسط.'}`;
