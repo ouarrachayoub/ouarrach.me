@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OUARRACH AI</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700&display=swap');
+  html, body { height: 100%; }
+  body { font-family: 'Plus Jakarta Sans', 'Tajawal', sans-serif; background: #0b0f19; color: #cbd5e1; }
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-thumb { background: rgba(255,255,255,.14); border-radius: 9999px; }
+  .brand-grad { background: linear-gradient(135deg, #0ea5e9, #6366f1 55%, #a855f7); }
+  .md { line-height: 1.7; font-size: 14.5px; word-break: break-word; }
+  .md > *:first-child { margin-top: 0; } .md > *:last-child { margin-bottom: 0; }
+  .md p { margin: .55em 0; }
+  .md ul { list-style: disc; padding-inline-start: 1.4em; margin: .5em 0; }
+  .md ol { list-style: decimal; padding-inline-start: 1.4em; margin: .5em 0; }
+  .md li { margin: .2em 0; }
+  .md h1, .md h2, .md h3 { color: #fff; font-weight: 700; margin: 1em 0 .4em; }
+  .md h1 { font-size: 1.3em; } .md h2 { font-size: 1.15em; } .md h3 { font-size: 1.05em; }
+  .md a { color: #38bdf8; text-decoration: underline; }
+  .md blockquote { border-inline-start: 3px solid #334155; padding-inline-start: 12px; color: #94a3b8; margin: .6em 0; }
+  .md table { border-collapse: collapse; margin: .7em 0; display: block; overflow-x: auto; }
+  .md th, .md td { border: 1px solid #334155; padding: 6px 10px; }
+  .md th { background: #111827; color: #fff; }
+  .md code { background: #111827; padding: 1px 6px; border-radius: 6px; font-family: ui-monospace, Menlo, monospace; font-size: .9em; color: #7dd3fc; }
+  .md pre { position: relative; background: #0d1117; border: 1px solid #1f2937; border-radius: 12px; margin: .8em 0; overflow: hidden; direction: ltr; text-align: left; }
+  .md pre code { display: block; background: transparent; padding: 14px; overflow-x: auto; color: inherit; font-size: 12.5px; }
+  .copy-btn { position: absolute; top: 6px; right: 6px; font-size: 11px; padding: 3px 9px; border-radius: 8px; background: #1f2937; color: #cbd5e1; border: 1px solid #334155; cursor: pointer; }
+  .copy-btn:hover { background: #334155; color: #fff; }
+  .typing::after { content: '▍'; animation: blink 1s steps(2) infinite; color: #38bdf8; }
+  @keyframes blink { 50% { opacity: 0; } }
+  textarea { resize: none; }
+</style>
+</head>
+<body class="h-screen flex overflow-hidden">
+
+<!-- Sidebar -->
+<aside id="sidebar" class="fixed md:static inset-y-0 start-0 z-30 w-72 -translate-x-full md:translate-x-0 rtl:translate-x-full md:rtl:translate-x-0 transition-transform bg-[#0a0d16] border-e border-slate-800/70 flex flex-col p-4 gap-3">
+  <div class="flex items-center gap-3 px-1 py-1">
+    <div class="w-9 h-9 rounded-2xl brand-grad flex items-center justify-center text-white font-extrabold shadow-lg shadow-sky-500/20">O</div>
+    <div class="flex-1">
+      <h1 class="font-extrabold text-sm tracking-wider text-white">OUARRACH.ME</h1>
+      <p class="text-[10px] font-bold text-sky-400">AI Chat · Free Hub</p>
+    </div>
+    <button class="md:hidden text-slate-400" onclick="toggleSidebar(false)"><i class="fas fa-times"></i></button>
+  </div>
+
+  <button onclick="newChat()" class="brand-grad text-white font-bold text-sm rounded-xl py-2.5 flex items-center justify-center gap-2 hover:opacity-90 transition">
+    <i class="fas fa-plus text-xs"></i> New chat
+  </button>
+
+  <div id="chatList" class="flex-1 overflow-y-auto space-y-1 -mx-1 px-1"></div>
+
+  <div class="border-t border-slate-800/70 pt-3 space-y-2 text-xs">
+    <button onclick="clearAll()" class="w-full text-start text-slate-500 hover:text-rose-400 transition"><i class="fas fa-trash-can me-2"></i>Clear all chats</button>
+    <a href="mailto:ouarrachayoub42@gmail.com" class="block text-slate-400 hover:text-white transition"><i class="fas fa-envelope me-2 text-sky-400"></i>ouarrachayoub42@gmail.com</a>
+    <a href="https://wa.me/212667903785" target="_blank" rel="noopener" class="block text-slate-400 hover:text-white transition"><i class="fab fa-whatsapp me-2 text-emerald-400"></i><span dir="ltr">+212 667-903785</span></a>
+  </div>
+</aside>
+<div id="backdrop" class="hidden fixed inset-0 bg-black/60 z-20 md:hidden" onclick="toggleSidebar(false)"></div>
+
+<!-- Main -->
+<div class="flex-1 flex flex-col min-w-0">
+  <header class="px-4 md:px-6 py-3 flex items-center gap-3 border-b border-slate-800/70 bg-[#0b0f19]/90 backdrop-blur">
+    <button class="md:hidden text-slate-300 text-lg" onclick="toggleSidebar(true)"><i class="fas fa-bars"></i></button>
+    <div class="flex items-center gap-2 text-white font-bold text-sm">
+      <i class="fas fa-brain text-purple-400"></i> OUARRACH AI
+      <span class="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 text-[10px] font-bold border border-emerald-500/20">Fabor</span>
+    </div>
+    <div class="flex-1"></div>
+    <select id="modelSelect" class="bg-slate-900 border border-slate-700 rounded-lg text-xs text-slate-200 px-2 py-1.5 focus:outline-none focus:border-sky-500 max-w-[230px]">
+      <option value="pollinations:openai">OpenAI (GPT) · Free ⭐</option>
+      <option value="pollinations:mistral">Mistral · Free</option>
+      <option value="pollinations:llama">Llama · Free</option>
+      <option value="pollinations:searchgpt">SearchGPT · Free</option>
+    </select>
+  </header>
+
+  <div id="diag" class="hidden mx-4 md:mx-6 mt-3 p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs space-y-1"></div>
+
+  <main id="scroller" class="flex-1 overflow-y-auto">
+    <div id="messages" class="max-w-3xl mx-auto w-full px-4 py-6 space-y-6"></div>
+  </main>
+
+  <footer class="px-4 pb-4 pt-2">
+    <div class="max-w-3xl mx-auto">
+      <div id="fileChip" class="hidden mb-2 inline-flex items-center gap-2 bg-slate-900 border border-sky-500/40 text-sky-300 text-xs rounded-xl px-3 py-1.5">
+        <i class="fas fa-paperclip"></i><span id="fileName" class="font-bold"></span>
+        <button onclick="removeFile()" class="text-slate-400 hover:text-white"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="flex items-end gap-2 bg-slate-900/90 border border-slate-700 focus-within:border-sky-500 rounded-2xl p-2 transition shadow-xl">
+        <input type="file" id="fileInput" class="hidden" accept=".pdf,.docx,.txt,.md,.csv,.json,.js,.py,.java,.c,.cpp,.html,.css,.sql,.png,.jpg,.jpeg,.webp">
+        <button onclick="document.getElementById('fileInput').click()" title="Attach PDF / DOCX / image / code" class="w-10 h-10 shrink-0 rounded-xl text-slate-400 hover:text-sky-400 hover:bg-slate-800 transition"><i class="fas fa-paperclip"></i></button>
+        <button id="imgBtn" onclick="toggleImgMode()" title="Illustration mode: the AI draws your idea as an SVG picture" class="w-10 h-10 shrink-0 rounded-xl text-slate-400 hover:text-purple-400 hover:bg-slate-800 transition"><i class="fas fa-image"></i></button>
+        <textarea id="input" rows="1" dir="auto" placeholder="Ask anything… / اسأل أي سؤال… / Pose ta question…" class="flex-1 bg-transparent text-sm text-slate-100 placeholder-slate-500 focus:outline-none py-2.5 max-h-48"></textarea>
+        <button id="sendBtn" onclick="onSendClick()" class="w-10 h-10 shrink-0 rounded-xl brand-grad text-white hover:opacity-90 transition flex items-center justify-center"><i id="sendIcon" class="fas fa-arrow-up"></i></button>
+      </div>
+      <p class="text-[11px] text-slate-500 text-center mt-2">OUARRACH AI can make mistakes. Check important info. · Enter = send, Shift+Enter = new line</p>
+    </div>
+  </footer>
+</div>
+
+<script>
+/* ================= Config ================= */
+const SYSTEM = `You are OUARRACH AI, a smart, friendly and highly capable assistant. You answer ANY question: study, programming, math, science, writing, daily life, business, ideas, translation, and more.
+- Reply in the same language the user writes in (Moroccan Darija, Arabic, French, English...). If the user writes Darija in Latin letters, reply in Darija in Latin letters.
+- Give complete, thorough, well-structured, in-depth answers like a top expert tutor: use markdown (headings, lists, tables, code blocks), examples, and do not cut answers short unless the user asks for brevity.
+- Be accurate. Explain step by step when it helps. For exercises (TD/exams) give a full worked solution. For code, give correct, runnable code in code blocks and explain briefly.
+- If a file is attached, base your answer on its real content. If you are not sure about something, say so instead of inventing.
+- DIAGRAMS AND DRAWINGS: when the user wants a diagram, schema, UML, flowchart, mind map, architecture, timeline, chart, icon, logo, poster or illustration, DRAW it yourself as code: use a markdown fenced code block whose language is mermaid when Mermaid supports it; otherwise write one complete self-contained fenced code block whose language is svg, with a viewBox, designed for a WHITE background.`;
+
+const LS_KEY = 'ouarrach_chats_v3', MAX_FILE_CHARS = 60000;
+let chats = [], currentId = null, busy = false, stopFlag = false, attached = null, imgMode = false;
+
+/* ================= Helpers ================= */
+const $ = (s) => document.querySelector(s);
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+function esc(s) { return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function load() { try { chats = JSON.parse(localStorage.getItem(LS_KEY) || '[]'); } catch { chats = []; } }
+function save() { try { localStorage.setItem(LS_KEY, JSON.stringify(chats, (k, v) => (k === '_mer') ? undefined : v)); } catch (e) {} }
+function cur() { return chats.find(c => c.id === currentId); }
+function errMsg(e) { return e?.error?.message || e?.message || (typeof e === 'string' ? e : JSON.stringify(e)); }
+
+function diag(msg) {
+  const d = document.getElementById('diag');
+  d.classList.remove('hidden');
+  d.innerHTML += '<div>' + esc(msg) + '</div>';
+}
+window.addEventListener('error', (e) => diag('JS error: ' + e.message));
+window.addEventListener('unhandledrejection', (e) => diag('Error: ' + errMsg(e.reason)));
+
+try { if (window.pdfjsLib) pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js'; } catch {}
+try { if (window.marked) marked.setOptions({ breaks: true, gfm: true }); } catch {}
+
+function renderMd(text) {
+  try { if (window.marked && window.DOMPurify) return DOMPurify.sanitize(marked.parse(text || '')); } catch {}
+  return '<div style="white-space:pre-wrap">' + esc(text || '') + '</div>';
+}
+function enhance(el) {
+  el.querySelectorAll('pre').forEach(pre => {
+    if (pre.querySelector('.copy-btn')) return;
+    const code = pre.querySelector('code');
+    if (code) { try { hljs.highlightElement(code); } catch {} }
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn'; btn.textContent = 'Copy';
+    btn.onclick = async () => {
+      try { await navigator.clipboard.writeText(code ? code.innerText : pre.innerText); btn.textContent = 'Copied ✓'; }
+      catch { btn.textContent = 'Error'; }
+      setTimeout(() => btn.textContent = 'Copy', 1500);
+    };
+    pre.appendChild(btn);
+  });
+}
+
+/* ================= Sidebar / chats ================= */
+function toggleSidebar(open) {
+  const sb = $('#sidebar'), bd = $('#backdrop');
+  sb.classList.toggle('-translate-x-full', !open);
+  bd.classList.toggle('hidden', !open);
+}
+function renderList() {
+  const box = $('#chatList');
+  box.innerHTML = '';
+  chats.slice().reverse().forEach(c => {
+    const row = document.createElement('div');
+    row.className = 'group flex items-center gap-2 rounded-xl px-3 py-2 text-sm cursor-pointer transition ' +
+      (c.id === currentId ? 'bg-slate-800 text-white' : 'text-slate-400 hover:bg-slate-800/60 hover:text-white');
+    const t = document.createElement('span');
+    t.className = 'flex-1 truncate'; t.dir = 'auto'; t.textContent = c.title || 'New chat';
+    const d = document.createElement('button');
+    d.className = 'opacity-0 group-hover:opacity-100 text-slate-500 hover:text-rose-400 transition';
+    d.innerHTML = '<i class="fas fa-trash-can text-xs"></i>';
+    d.onclick = (e) => { e.stopPropagation(); deleteChat(c.id); };
+    row.onclick = () => { if (busy) return; currentId = c.id; renderAll(); toggleSidebar(false); };
+    row.append(t, d);
+    box.appendChild(row);
+  });
+}
+function newChat() {
+  if (busy) return;
+  const c = { id: uid(), title: '', messages: [] };
+  chats.push(c); currentId = c.id; save(); renderAll(); toggleSidebar(false);
+  $('#input').focus();
+}
+function deleteChat(id) {
+  if (busy) return;
+  chats = chats.filter(c => c.id !== id);
+  if (currentId === id) currentId = chats.length ? chats[chats.length - 1].id : null;
+  save(); renderAll();
+}
+function clearAll() {
+  if (busy) return;
+  if (!confirm('Delete all chats?')) return;
+  chats = []; currentId = null; save(); renderAll();
+}
+
+/* ================= Rendering messages ================= */
+const SUGGESTIONS = [
+  ['fa-diagram-project', 'Rsem liya diagramme use case l systeme dyal bibliothèque'],
+  ['fa-square-root-variable', 'Ch7al hiya intégrale de x·sin(x) ? 7ellha khtwa b khtwa'],
+  ['fa-code', 'Chra7 liya récursivité f Python b mital'],
+  ['fa-lightbulb', 'A3ṭini 5 afkar dyal projet informatique l fin d\'études'],
+];
+function welcomeHTML() {
+  return `<div class="text-center pt-10 pb-4">
+    <div class="w-14 h-14 mx-auto rounded-3xl brand-grad flex items-center justify-center text-white text-xl shadow-xl shadow-sky-500/20 mb-4"><i class="fas fa-brain"></i></div>
+    <h2 class="text-2xl font-extrabold text-white mb-1">Salam! Ana OUARRACH AI 👋</h2>
+    <p class="text-slate-400 text-sm mb-6" dir="auto">Ana daba khaddam 100% fabor bla login bla walo. Sewelni ay haja!</p>
+    <div class="grid sm:grid-cols-2 gap-3 text-start">
+      ${SUGGESTIONS.map((s, i) => `<button onclick="useSuggestion(${i})" class="p-4 rounded-2xl bg-slate-900/70 border border-slate-800 hover:border-sky-500/50 hover:bg-slate-800/70 transition text-sm text-slate-300 flex gap-3 items-start"><i class="fas ${s[0]} text-sky-400 mt-0.5"></i><span dir="auto">${esc(s[1])}</span></button>`).join('')}
+    </div>
+  </div>`;
+}
+function useSuggestion(i) { $('#input').value = SUGGESTIONS[i][1]; send(); }
+
+function userBubble(m) {
+  const wrap = document.createElement('div');
+  wrap.className = 'flex justify-end';
+  const b = document.createElement('div');
+  b.className = 'brand-grad text-white rounded-2xl rounded-ee-md px-4 py-3 max-w-[85%] text-sm shadow-lg whitespace-pre-wrap break-words';
+  b.dir = 'auto';
+  if (m.file) {
+    const chip = document.createElement('div');
+    chip.className = 'text-xs font-bold mb-1 opacity-90';
+    chip.innerHTML = '<i class="fas fa-paperclip me-1"></i>';
+    chip.appendChild(document.createTextNode(m.file));
+    b.appendChild(chip);
+  }
+  b.appendChild(document.createTextNode(m.shown || ''));
+  wrap.appendChild(b);
+  return wrap;
+}
+function aiBubble(m) {
+  const wrap = document.createElement('div');
+  wrap.className = 'flex gap-3 items-start';
+  wrap.innerHTML = '<div class="w-8 h-8 rounded-xl brand-grad flex items-center justify-center text-white text-xs font-bold shrink-0 shadow-md">AI</div>';
+  const col = document.createElement('div');
+  col.className = 'flex-1 min-w-0';
+  const b = document.createElement('div');
+  b.className = 'md text-slate-200';
+  b.dir = 'auto';
+  paintFinal(b, m);
+  col.appendChild(b);
+  if (m.content) col.appendChild(actionsBar(m));
+  wrap.appendChild(col);
+  return wrap;
+}
+function renderMessages() {
+  const box = $('#messages');
+  box.innerHTML = '';
+  const c = cur();
+  if (!c || c.messages.length === 0) { box.innerHTML = welcomeHTML(); return; }
+  c.messages.forEach(m => box.appendChild(m.role === 'user' ? userBubble(m) : aiBubble(m)));
+  scrollDown(true);
+}
+function renderAll() { renderList(); renderMessages(); }
+function scrollDown(force) {
+  const s = $('#scroller');
+  const near = s.scrollHeight - s.scrollTop - s.clientHeight < 160;
+  if (force || near) s.scrollTop = s.scrollHeight;
+}
+
+/* ================= Attachments ================= */
+async function readAttachment(file) {
+  const n = file.name.toLowerCase();
+  if (n.endsWith('.pdf')) {
+    if (!window.pdfjsLib) throw new Error('PDF reader failed to load.');
+    const pdf = await pdfjsLib.getDocument({ data: await file.arrayBuffer() }).promise;
+    let t = '';
+    for (let i = 1; i <= pdf.numPages; i++) {
+      const page = await pdf.getPage(i);
+      const tc = await page.getTextContent();
+      t += `\n--- Page ${i} ---\n` + tc.items.map(x => x.str).join(' ');
+      if (t.length > MAX_FILE_CHARS) break;
+    }
+    return { name: file.name, type: 'text', text: t.slice(0, MAX_FILE_CHARS) };
+  }
+  if (n.endsWith('.docx')) {
+    if (!window.mammoth) throw new Error('DOCX reader failed to load.');
+    const r = await mammoth.extractRawText({ arrayBuffer: await file.arrayBuffer() });
+    return { name: file.name, type: 'text', text: r.value.slice(0, MAX_FILE_CHARS) };
+  }
+  if (/\.(png|jpe?g|webp)$/.test(n)) {
+    const dataUrl = await new Promise((res, rej) => { const fr = new FileReader(); fr.onload = () => res(fr.result); fr.onerror = rej; fr.readAsDataURL(file); });
+    return { name: file.name, type: 'image', dataUrl };
+  }
+  return { name: file.name, type: 'text', text: (await file.text()).slice(0, MAX_FILE_CHARS) };
+}
+$('#fileInput').addEventListener('change', async (e) => {
+  const f = e.target.files[0];
+  if (!f) return;
+  try {
+    $('#fileName').textContent = 'Reading ' + f.name + '…';
+    $('#fileChip').classList.remove('hidden');
+    attached = await readAttachment(f);
+    $('#fileName').textContent = f.name;
+  } catch (err) {
+    attached = null; $('#fileChip').classList.add('hidden');
+    alert(errMsg(err));
+  }
+  e.target.value = '';
+});
+function removeFile() { attached = null; $('#fileChip').classList.add('hidden'); }
+
+/* ================= Providers (FREE API) ================= */
+async function apiError(r, name) {
+  let t = '';
+  try { t = await r.text(); } catch {}
+  let msg = t;
+  try { const j = JSON.parse(t); msg = j.error?.message || j.message || t; } catch {}
+  return new Error(name + ' error ' + r.status + ': ' + String(msg).slice(0, 300));
+}
+async function* sseData(r) {
+  const reader = r.body.getReader(), dec = new TextDecoder();
+  let buf = '';
+  try {
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buf += dec.decode(value, { stream: true });
+      const lines = buf.split('\n');
+      buf = lines.pop();
+      for (const ln of lines) {
+        if (!ln.startsWith('data:')) continue;
+        const d = ln.slice(5).trim();
+        if (d && d !== '[DONE]') yield d;
+      }
+    }
+  } finally { try { reader.cancel(); } catch {} }
+}
+function cleanHistory(history) {
+  const h = history.filter(m => m.content && !m.err);
+  while (h.length && h[0].role !== 'user') h.shift();
+  return h;
+}
+
+// FREE API (Pollinations.ai)
+async function* getStream(sel, history, image, content) {
+  const i = sel.indexOf(':');
+  const model = sel.slice(i + 1);
+  
+  const msgs = [{ role: 'system', content: SYSTEM }, ...cleanHistory(history).map(m => ({ role: m.role, content: m.content }))];
+  if (image && msgs.length > 1) {
+    const last = msgs[msgs.length - 1];
+    last.content = [{ type: 'text', text: last.content }, { type: 'image_url', image_url: { url: image } }];
+  }
+  
+  const r = await fetch('https://text.pollinations.ai/openai', {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ model: model, messages: msgs, stream: true })
+  });
+  
+  if (!r.ok) throw await apiError(r, 'Free AI Server');
+  for await (const d of sseData(r)) {
+    let j; try { j = JSON.parse(d); } catch { continue; }
+    const t = j.choices?.[0]?.delta?.content;
+    if (t) yield { text: t };
+  }
+}
+
+/* ================= Diagrams & Canvas Export ================= */
+const SVG_OPTS = { USE_PROFILES: { svg: true, svgFilters: true } };
+
+function serializeSvg(svgEl, w, h) {
+  const clone = svgEl.cloneNode(true);
+  if (w && h) { clone.setAttribute('width', w); clone.setAttribute('height', h); }
+  if (!clone.getAttribute('xmlns')) clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+  return new XMLSerializer().serializeToString(clone);
+}
+function saveBlob(blob, filename) {
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob); a.download = filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 3000);
+}
+function downloadSvg(svgEl, filename) { saveBlob(new Blob([serializeSvg(svgEl)], { type: 'image/svg+xml;charset=utf-8' }), filename); }
+function svgToPng(svgEl, filename) {
+  const vb = (svgEl.getAttribute('viewBox') || '').split(' ');
+  const w = parseInt(svgEl.getAttribute('width') || vb[2] || '800', 10);
+  const h = parseInt(svgEl.getAttribute('height') || vb[3] || '600', 10);
+  const svgStr = serializeSvg(svgEl, w, h);
+  const img = new Image();
+  const blob = new Blob([svgStr], { type: 'image/svg+xml;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  img.onload = () => {
+    const cvs = document.createElement('canvas');
+    cvs.width = w; cvs.height = h;
+    const ctx = cvs.getContext('2d');
+    ctx.fillStyle = '#ffffff'; 
+    ctx.fillRect(0, 0, w, h);
+    ctx.drawImage(img, 0, 0, w, h);
+    cvs.toBlob(b => { 
+      saveBlob(b, filename); 
+      URL.revokeObjectURL(url); 
+    }, 'image/png');
+  };
+  img.src = url;
+}
+
+/* ================= Final Rendering ================= */
+async function paintFinal(container, m) {
+  if (m.err) { 
+    container.innerHTML = '<span class="text-rose-400"><i class="fas fa-exclamation-triangle me-2"></i>' + esc(m.content) + '</span>'; 
+    return; 
+  }
+  if (!m.content) { 
+    container.innerHTML = '<span class="typing"></span>'; 
+    return; 
+  }
+  
+  container.innerHTML = renderMd(m.content);
+  enhance(container);
+
+  container.querySelectorAll('pre code.language-svg').forEach(el => {
+    const pre = el.parentElement;
+    const wrap = document.createElement('div');
+    wrap.className = 'my-4 bg-white rounded-xl overflow-hidden border border-slate-700 p-4 relative flex flex-col items-center';
+    
+    try {
+      const cleanSvg = DOMPurify.sanitize(el.innerText, SVG_OPTS);
+      const div = document.createElement('div');
+      div.innerHTML = cleanSvg;
+      const svg = div.querySelector('svg');
+      
+      if (svg) {
+        svg.style.maxWidth = '100%'; 
+        svg.style.height = 'auto';
+        wrap.appendChild(svg);
+        
+        const btnWrap = document.createElement('div');
+        btnWrap.className = 'flex gap-2 mt-4 w-full justify-center border-t border-slate-200 pt-3';
+        
+        const dlSvg = document.createElement('button');
+        dlSvg.className = 'text-xs font-bold bg-slate-800 text-white px-4 py-1.5 rounded-lg hover:bg-slate-700 transition';
+        dlSvg.innerHTML = '<i class="fas fa-download me-1"></i> SVG';
+        dlSvg.onclick = () => downloadSvg(svg, 'illustration.svg');
+        
+        const dlPng = document.createElement('button');
+        dlPng.className = 'text-xs font-bold bg-sky-600 text-white px-4 py-1.5 rounded-lg hover:bg-sky-500 transition';
+        dlPng.innerHTML = '<i class="fas fa-image me-1"></i> PNG';
+        dlPng.onclick = () => svgToPng(svg, 'illustration.png');
+        
+        btnWrap.append(dlSvg, dlPng);
+        wrap.appendChild(btnWrap);
+        pre.replaceWith(wrap);
+      }
+    } catch(e) {}
+  });
+
+  if (window.mermaid) {
+    container.querySelectorAll('pre code.language-mermaid').forEach(async el => {
+      const pre = el.parentElement;
+      const src = el.innerText;
+      const id = 'mer-' + uid();
+      
+      const wrap = document.createElement('div');
+      wrap.className = 'my-4 bg-slate-900 rounded-xl overflow-hidden border border-slate-700 p-4 flex flex-col items-center';
+      
+      const target = document.createElement('div');
+      target.id = id;
+      wrap.appendChild(target);
+      pre.replaceWith(wrap);
+      
+      try {
+        const { svg } = await mermaid.render(id, src);
+        target.innerHTML = DOMPurify.sanitize(svg, SVG_OPTS);
+        const svgEl = target.querySelector('svg');
+        
+        if (svgEl) {
+          svgEl.style.maxWidth = '100%'; 
+          svgEl.style.height = 'auto';
+          
+          const btnWrap = document.createElement('div');
+          btnWrap.className = 'flex gap-2 mt-4 justify-center w-full border-t border-slate-800 pt-3';
+          
+          const dlPng = document.createElement('button');
+          dlPng.className = 'text-xs font-bold bg-sky-600 text-white px-4 py-1.5 rounded-lg hover:bg-sky-500 transition';
+          dlPng.innerHTML = '<i class="fas fa-image me-1"></i> PNG';
+          dlPng.onclick = () => svgToPng(svgEl, 'diagram.png');
+          
+          btnWrap.appendChild(dlPng);
+          wrap.appendChild(btnWrap);
+        }
+      } catch(e) { 
+        wrap.innerHTML = '<div class="text-rose-400 text-xs p-2 font-mono"><i class="fas fa-times-circle me-1"></i> Mermaid Syntax Error</div>'; 
+      }
+    });
+  }
+}
+
+function actionsBar(m) {
+  const bar = document.createElement('div');
+  bar.className = 'flex gap-3 mt-2 pt-2 border-t border-slate-800/70';
+  
+  const mkBtn = (icon, text, fn) => {
+    const b = document.createElement('button');
+    b.className = 'text-[11px] font-medium flex items-center gap-1.5 text-slate-400 hover:text-sky-400 transition';
+    b.innerHTML = `<i class="fas ${icon}"></i> ${text}`;
+    b.onclick = fn;
+    return b;
+  };
+  
+  bar.appendChild(mkBtn('fa-file-pdf', 'Export PDF', () => {
+     const w = window.open('', '_blank');
+     w.document.write(`<html><head><title>Export</title><style>body{font-family:sans-serif;padding:40px;line-height:1.6;color:#111;} pre{background:#f4f4f4;padding:15px;border-radius:8px;} table{border-collapse:collapse;width:100%} th,td{border:1px solid #ddd;padding:8px}</style></head><body>${renderMd(m.content)}</body></html>`);
+     w.document.close();
+     setTimeout(() => w.print(), 500);
+  }));
+  
+  bar.appendChild(mkBtn('fa-file-word', 'Export Word', () => {
+     const html = `<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export</title></head><body style="font-family:sans-serif">${renderMd(m.content)}</body></html>`;
+     const blob = new Blob(['\ufeff', html], { type: 'application/msword' });
+     saveBlob(blob, 'OUARRACH_AI_Export.doc');
+  }));
+  
+  return bar;
+}
+
+function toggleImgMode() {
+  imgMode = !imgMode;
+  const b = $('#imgBtn');
+  if (imgMode) b.classList.replace('text-slate-400', 'text-purple-400');
+  else b.classList.replace('text-purple-400', 'text-slate-400');
+}
+
+/* ================= Chat Engine ================= */
+async function send() {
+  if (busy) { stopFlag = true; return; }
+  
+  const inp = $('#input');
+  let text = inp.value.trim();
+  if (!text && !attached) return;
+
+  const sel = $('#modelSelect').value;
+  if (imgMode) text += ' (Please generate a highly detailed, colored SVG illustration block for this request).';
+
+  if (!chats.length || !currentId) newChat();
+  const c = cur();
+  
+  if (!c.title) c.title = text.slice(0, 35) + (text.length > 35 ? '...' : '') || (attached ? attached.name : 'New Chat');
+
+  const uMsg = { role: 'user', content: text, shown: text };
+  if (attached) {
+    if (attached.type === 'text') uMsg.content = `[Attached File: ${attached.name}]\n\n${attached.text}\n\nUser Question:\n${text}`;
+    if (attached.type === 'image') uMsg.image = attached.dataUrl;
+    uMsg.file = attached.name;
+    removeFile();
+  }
+  c.messages.push(uMsg);
+
+  const aiMsg = { role: 'assistant', content: '' };
+  c.messages.push(aiMsg);
+  save(); 
+  renderAll();
+
+  inp.value = ''; 
+  inp.style.height = 'auto';
+  busy = true; 
+  stopFlag = false;
+  
+  const icon = $('#sendIcon'); 
+  icon.className = 'fas fa-square text-xs'; 
+
+  try {
+    const stream = await getStream(sel, c.messages.slice(0, -1), uMsg.image, uMsg.content);
+    for await (const chunk of stream) {
+      if (stopFlag) break;
+      aiMsg.content += chunk.text || '';
+      renderMessages();
+    }
+  } catch (e) {
+    aiMsg.err = true;
+    aiMsg.content = errMsg(e);
+  }
+
+  busy = false; 
+  stopFlag = false;
+  icon.className = 'fas fa-arrow-up';
+  save(); 
+  renderAll();
+}
+
+function onSendClick() { send(); }
+
+/* ================= Event Listeners & Init ================= */
+$('#input').addEventListener('keydown', e => {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); }
+});
+$('#input').addEventListener('input', function() {
+  this.style.height = 'auto';
+  this.style.height = Math.min(this.scrollHeight, 150) + 'px';
+});
+
+load();
+if (chats.length) currentId = chats[chats.length - 1].id;
+renderAll();
+</script>
+</body>
+</html>
