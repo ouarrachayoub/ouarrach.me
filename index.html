@@ -51,7 +51,7 @@
     <div class="w-9 h-9 rounded-2xl brand-grad flex items-center justify-center text-white font-extrabold shadow-lg shadow-sky-500/20">O</div>
     <div class="flex-1">
       <h1 class="font-extrabold text-sm tracking-wider text-white">OUARRACH.ME</h1>
-      <p class="text-[10px] font-bold text-sky-400">AI Chat · Free Hub</p>
+      <p class="text-[10px] font-bold text-sky-400">AI Chat · Scholar Hub</p>
     </div>
     <button class="md:hidden text-slate-400" onclick="toggleSidebar(false)"><i class="fas fa-times"></i></button>
   </div>
@@ -76,14 +76,12 @@
     <button class="md:hidden text-slate-300 text-lg" onclick="toggleSidebar(true)"><i class="fas fa-bars"></i></button>
     <div class="flex items-center gap-2 text-white font-bold text-sm">
       <i class="fas fa-brain text-purple-400"></i> OUARRACH AI
-      <span class="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 text-[10px] font-bold border border-emerald-500/20">Fabor</span>
+      <span class="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 text-[10px] font-bold border border-emerald-500/20">Real AI</span>
     </div>
     <div class="flex-1"></div>
-    <select id="modelSelect" class="bg-slate-900 border border-slate-700 rounded-lg text-xs text-slate-200 px-2 py-1.5 focus:outline-none focus:border-sky-500 max-w-[230px]">
-      <option value="pollinations:openai">OpenAI (GPT) · Free ⭐</option>
-      <option value="pollinations:mistral">Mistral · Free</option>
-      <option value="pollinations:llama">Llama · Free</option>
-      <option value="pollinations:searchgpt">SearchGPT · Free</option>
+    <select id="modelSelect" class="bg-slate-900 border border-slate-700 rounded-lg text-xs text-slate-200 px-2 py-1.5 focus:outline-none focus:border-sky-500">
+      <option value="fast">⚡ Fast</option>
+      <option value="smart">🧠 Smart (deeper, slower)</option>
     </select>
   </header>
 
@@ -113,14 +111,20 @@
 
 <script>
 /* ================= Config ================= */
+/* ================= CONFIG: paste your FREE keys here (only the site owner does this, once) ================= */
+const GEMINI_KEY = '';   // free: https://aistudio.google.com/apikey   (starts with AIza)
+const GROQ_KEY   = '';   // optional backup, free: https://console.groq.com/keys   (starts with gsk_)
+
 const SYSTEM = `You are OUARRACH AI, a smart, friendly and highly capable assistant. You answer ANY question: study, programming, math, science, writing, daily life, business, ideas, translation, and more.
 - Reply in the same language the user writes in (Moroccan Darija, Arabic, French, English...). If the user writes Darija in Latin letters, reply in Darija in Latin letters.
 - Give complete, thorough, well-structured, in-depth answers like a top expert tutor: use markdown (headings, lists, tables, code blocks), examples, and do not cut answers short unless the user asks for brevity.
 - Be accurate. Explain step by step when it helps. For exercises (TD/exams) give a full worked solution. For code, give correct, runnable code in code blocks and explain briefly.
 - If a file is attached, base your answer on its real content. If you are not sure about something, say so instead of inventing.
-- DIAGRAMS AND DRAWINGS: when the user wants a diagram, schema, UML, flowchart, mind map, architecture, timeline, chart, icon, logo, poster or illustration, DRAW it yourself as code: use a markdown fenced code block whose language is mermaid when Mermaid supports it; otherwise write one complete self-contained fenced code block whose language is svg, with a viewBox, designed for a WHITE background.`;
+- This app has built-in tools: under every answer there are buttons to download it as PDF or Word. If the user asks for a PDF or Word file, never say you cannot: write the full document content right away and tell them to click the PDF/Word button under your answer.
+- DIAGRAMS AND DRAWINGS: when the user wants a diagram, schema, UML (use case, class, sequence...), flowchart, mind map, architecture, timeline, chart, icon, logo, poster or illustration, DRAW it yourself as code: use a markdown fenced code block whose language is mermaid when Mermaid supports it (flowchart, sequenceDiagram, classDiagram, stateDiagram-v2, erDiagram, gantt, mindmap); otherwise write one complete self-contained fenced code block whose language is svg, with a viewBox, designed for a WHITE background (include a white rect), readable font sizes, clear arrows (marker defs), using presentation attributes (fill, stroke, font-size) and NO style tag, NO script, NO external images. The app renders these blocks as pictures with PNG/SVG download buttons. Do not send the user to external tools; just draw it, then add a short explanation.
+- REALISTIC PHOTOS: you cannot generate photographic images in this app. If asked for a real photo, say so briefly, offer an SVG illustration instead, and give a detailed English prompt the user can paste into an image generator.`;
 
-const LS_KEY = 'ouarrach_chats_v3', MAX_FILE_CHARS = 60000;
+const LS_KEY = 'ouarrach_chats_v2', LS_MODEL = 'ouarrach_tier_v1', MAX_FILE_CHARS = 60000;
 let chats = [], currentId = null, busy = false, stopFlag = false, attached = null, imgMode = false;
 
 /* ================= Helpers ================= */
@@ -128,7 +132,7 @@ const $ = (s) => document.querySelector(s);
 const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
 function esc(s) { return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 function load() { try { chats = JSON.parse(localStorage.getItem(LS_KEY) || '[]'); } catch { chats = []; } }
-function save() { try { localStorage.setItem(LS_KEY, JSON.stringify(chats, (k, v) => (k === '_mer') ? undefined : v)); } catch (e) {} }
+function save() { try { localStorage.setItem(LS_KEY, JSON.stringify(chats, (k, v) => (k === '_mer') ? undefined : v)); } catch (e) { /* storage full */ } }
 function cur() { return chats.find(c => c.id === currentId); }
 function errMsg(e) { return e?.error?.message || e?.message || (typeof e === 'string' ? e : JSON.stringify(e)); }
 
@@ -216,7 +220,7 @@ function welcomeHTML() {
   return `<div class="text-center pt-10 pb-4">
     <div class="w-14 h-14 mx-auto rounded-3xl brand-grad flex items-center justify-center text-white text-xl shadow-xl shadow-sky-500/20 mb-4"><i class="fas fa-brain"></i></div>
     <h2 class="text-2xl font-extrabold text-white mb-1">Salam! Ana OUARRACH AI 👋</h2>
-    <p class="text-slate-400 text-sm mb-6" dir="auto">Ana daba khaddam 100% fabor bla login bla walo. Sewelni ay haja!</p>
+    <p class="text-slate-400 text-sm mb-6" dir="auto">اسأل أي سؤال أو أرفق PDF / Cours / TD / كود وسأجيبك · Ask anything or attach a file</p>
     <div class="grid sm:grid-cols-2 gap-3 text-start">
       ${SUGGESTIONS.map((s, i) => `<button onclick="useSuggestion(${i})" class="p-4 rounded-2xl bg-slate-900/70 border border-slate-800 hover:border-sky-500/50 hover:bg-slate-800/70 transition text-sm text-slate-300 flex gap-3 items-start"><i class="fas ${s[0]} text-sky-400 mt-0.5"></i><span dir="auto">${esc(s[1])}</span></button>`).join('')}
     </div>
@@ -275,7 +279,7 @@ function scrollDown(force) {
 async function readAttachment(file) {
   const n = file.name.toLowerCase();
   if (n.endsWith('.pdf')) {
-    if (!window.pdfjsLib) throw new Error('PDF reader failed to load.');
+    if (!window.pdfjsLib) throw new Error('PDF reader failed to load (CDN blocked?). Try another network or paste the text.');
     const pdf = await pdfjsLib.getDocument({ data: await file.arrayBuffer() }).promise;
     let t = '';
     for (let i = 1; i <= pdf.numPages; i++) {
@@ -284,10 +288,11 @@ async function readAttachment(file) {
       t += `\n--- Page ${i} ---\n` + tc.items.map(x => x.str).join(' ');
       if (t.length > MAX_FILE_CHARS) break;
     }
+    if (t.replace(/--- Page \d+ ---/g, '').trim().length < 30) throw new Error('This PDF has no selectable text (scanned?). Try a screenshot as an image instead.');
     return { name: file.name, type: 'text', text: t.slice(0, MAX_FILE_CHARS) };
   }
   if (n.endsWith('.docx')) {
-    if (!window.mammoth) throw new Error('DOCX reader failed to load.');
+    if (!window.mammoth) throw new Error('DOCX reader failed to load (CDN blocked?).');
     const r = await mammoth.extractRawText({ arrayBuffer: await file.arrayBuffer() });
     return { name: file.name, type: 'text', text: r.value.slice(0, MAX_FILE_CHARS) };
   }
@@ -313,13 +318,17 @@ $('#fileInput').addEventListener('change', async (e) => {
 });
 function removeFile() { attached = null; $('#fileChip').classList.add('hidden'); }
 
-/* ================= Providers (FREE API) ================= */
-async function apiError(r, name) {
-  let t = '';
-  try { t = await r.text(); } catch {}
-  let msg = t;
-  try { const j = JSON.parse(t); msg = j.error?.message || j.message || t; } catch {}
-  return new Error(name + ' error ' + r.status + ': ' + String(msg).slice(0, 300));
+/* ================= AI calls (direct from the page, visitors enter nothing) ================= */
+function splitDataUrl(u) { const m = /^data:(image\/(?:png|jpeg|webp));base64,(.+)$/.exec(u || ''); return m ? { mime: m[1], data: m[2] } : null; }
+function prepMessages(history) {
+  const out = [];
+  for (const m of history) {
+    if (!m.content || m.err || (m.role !== 'user' && m.role !== 'assistant')) continue;
+    if (out.length && out[out.length - 1].role === m.role) out[out.length - 1].content += '\n\n' + m.content;
+    else out.push({ role: m.role, content: m.content });
+  }
+  while (out.length && out[0].role !== 'user') out.shift();
+  return out;
 }
 async function* sseData(r) {
   const reader = r.body.getReader(), dec = new TextDecoder();
@@ -339,38 +348,58 @@ async function* sseData(r) {
     }
   } finally { try { reader.cancel(); } catch {} }
 }
-function cleanHistory(history) {
-  const h = history.filter(m => m.content && !m.err);
-  while (h.length && h[0].role !== 'user') h.shift();
-  return h;
-}
-
-// FREE API (Pollinations.ai)
-async function* getStream(sel, history, image, content) {
-  const i = sel.indexOf(':');
-  const model = sel.slice(i + 1);
-  
-  const msgs = [{ role: 'system', content: SYSTEM }, ...cleanHistory(history).map(m => ({ role: m.role, content: m.content }))];
-  if (image && msgs.length > 1) {
-    const last = msgs[msgs.length - 1];
-    last.content = [{ type: 'text', text: last.content }, { type: 'image_url', image_url: { url: image } }];
-  }
-  
-  const r = await fetch('https://text.pollinations.ai/openai', {
+function geminiCall(model, msgs, img) {
+  const contents = msgs.map(m => ({ role: m.role === 'assistant' ? 'model' : 'user', parts: [{ text: m.content }] }));
+  if (img) contents[contents.length - 1].parts.unshift({ inlineData: { mimeType: img.mime, data: img.data } });
+  return fetch('https://generativelanguage.googleapis.com/v1beta/models/' + model + ':streamGenerateContent?alt=sse', {
     method: 'POST',
-    headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({ model: model, messages: msgs, stream: true })
+    headers: { 'content-type': 'application/json', 'x-goog-api-key': GEMINI_KEY },
+    body: JSON.stringify({ systemInstruction: { parts: [{ text: SYSTEM }] }, contents, generationConfig: { maxOutputTokens: 8192 } })
   });
-  
-  if (!r.ok) throw await apiError(r, 'Free AI Server');
-  for await (const d of sseData(r)) {
-    let j; try { j = JSON.parse(d); } catch { continue; }
-    const t = j.choices?.[0]?.delta?.content;
-    if (t) yield { text: t };
+}
+function groqCall(model, msgs, img) {
+  const arr = [{ role: 'system', content: SYSTEM }, ...msgs.map(m => ({ ...m }))];
+  if (img) { const l = arr[arr.length - 1]; l.content = [{ type: 'text', text: l.content }, { type: 'image_url', image_url: { url: 'data:' + img.mime + ';base64,' + img.data } }]; }
+  return fetch('https://api.groq.com/openai/v1/chat/completions', {
+    method: 'POST',
+    headers: { 'content-type': 'application/json', authorization: 'Bearer ' + GROQ_KEY },
+    body: JSON.stringify({ model, messages: arr, stream: true, max_tokens: 6000 })
+  });
+}
+async function* chatStream(tier, history, image) {
+  if (!GEMINI_KEY && !GROQ_KEY) throw new Error('Not configured: the site owner must paste a free GEMINI_KEY at the top of the script (see CONFIG).');
+  const msgs = prepMessages(history);
+  const img = splitDataUrl(image);
+  const tries = [];
+  if (GEMINI_KEY) {
+    if (tier === 'smart') tries.push(['gemini', 'gemini-2.5-pro']);
+    tries.push(['gemini', 'gemini-2.5-flash'], ['gemini', 'gemini-2.5-flash-lite']);
   }
+  if (GROQ_KEY) tries.push(['groq', img ? 'meta-llama/llama-4-scout-17b-16e-instruct' : 'llama-3.3-70b-versatile']);
+  const errs = [];
+  for (const [kind, model] of tries) {
+    let r;
+    try { r = kind === 'gemini' ? await geminiCall(model, msgs, img) : await groqCall(model, msgs, img); }
+    catch (e) { errs.push(model + ': ' + e.message); continue; }
+    if (!r.ok) { let t = ''; try { t = (await r.text()).slice(0, 160); } catch {} errs.push(model + ': ' + r.status + ' ' + t); continue; }
+    let sent = false, blocked = '';
+    for await (const d of sseData(r)) {
+      let j; try { j = JSON.parse(d); } catch { continue; }
+      let t = '';
+      if (kind === 'gemini') { if (j.promptFeedback?.blockReason) blocked = j.promptFeedback.blockReason; t = (j.candidates?.[0]?.content?.parts || []).map(p => p.text || '').join(''); }
+      else t = j.choices?.[0]?.delta?.content || '';
+      if (t) { sent = true; yield { text: t }; }
+    }
+    if (!sent) yield { text: blocked ? '(Blocked by the safety filter: ' + blocked + '. Please rephrase.)' : '(empty response, please try again)' };
+    return;
+  }
+  console.error('All providers failed:', errs);
+  if (errs.some(e => / 429 /.test(e))) throw new Error('The free daily limit of the AI is reached for now (429). Please try again in a few minutes or later today.');
+  if (errs.some(e => / 40[013] /.test(e))) throw new Error('The AI key is invalid or not allowed for this website (' + errs[0].slice(0, 120) + '). Owner: check the key and its website restriction.');
+  throw new Error('The AI service is temporarily unavailable. ' + (errs[0] || '').slice(0, 120));
 }
 
-/* ================= Diagrams & Canvas Export ================= */
+/* ================= Diagrams (mermaid + svg code blocks) ================= */
 const SVG_OPTS = { USE_PROFILES: { svg: true, svgFilters: true } };
 
 function serializeSvg(svgEl, w, h) {
@@ -387,225 +416,225 @@ function saveBlob(blob, filename) {
 }
 function downloadSvg(svgEl, filename) { saveBlob(new Blob([serializeSvg(svgEl)], { type: 'image/svg+xml;charset=utf-8' }), filename); }
 function svgToPng(svgEl, filename) {
-  const vb = (svgEl.getAttribute('viewBox') || '').split(' ');
-  const w = parseInt(svgEl.getAttribute('width') || vb[2] || '800', 10);
-  const h = parseInt(svgEl.getAttribute('height') || vb[3] || '600', 10);
-  const svgStr = serializeSvg(svgEl, w, h);
+  const vb = (svgEl.getAttribute('viewBox') || '').split(/[\s,]+/).map(Number);
+  const rect = svgEl.getBoundingClientRect();
+  const w = (vb.length === 4 && vb[2]) || rect.width || 800;
+  const h = (vb.length === 4 && vb[3]) || rect.height || 600;
+  const url = URL.createObjectURL(new Blob([serializeSvg(svgEl, w, h)], { type: 'image/svg+xml;charset=utf-8' }));
   const img = new Image();
-  const blob = new Blob([svgStr], { type: 'image/svg+xml;charset=utf-8' });
-  const url = URL.createObjectURL(blob);
   img.onload = () => {
-    const cvs = document.createElement('canvas');
-    cvs.width = w; cvs.height = h;
-    const ctx = cvs.getContext('2d');
-    ctx.fillStyle = '#ffffff'; 
-    ctx.fillRect(0, 0, w, h);
-    ctx.drawImage(img, 0, 0, w, h);
-    cvs.toBlob(b => { 
-      saveBlob(b, filename); 
-      URL.revokeObjectURL(url); 
-    }, 'image/png');
+    const s = 2, c = document.createElement('canvas');
+    c.width = Math.round(w * s); c.height = Math.round(h * s);
+    const ctx = c.getContext('2d');
+    ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, c.width, c.height);
+    ctx.drawImage(img, 0, 0, c.width, c.height);
+    URL.revokeObjectURL(url);
+    try { c.toBlob(b => b ? saveBlob(b, filename) : alert('PNG export failed. Use SVG.'), 'image/png'); }
+    catch { alert('PNG export blocked by the browser. Use the SVG button instead.'); }
   };
+  img.onerror = () => { URL.revokeObjectURL(url); alert('Could not export PNG. Use the SVG button instead.'); };
   img.src = url;
 }
-
-/* ================= Final Rendering ================= */
-async function paintFinal(container, m) {
-  if (m.err) { 
-    container.innerHTML = '<span class="text-rose-400"><i class="fas fa-exclamation-triangle me-2"></i>' + esc(m.content) + '</span>'; 
-    return; 
-  }
-  if (!m.content) { 
-    container.innerHTML = '<span class="typing"></span>'; 
-    return; 
-  }
-  
-  container.innerHTML = renderMd(m.content);
-  enhance(container);
-
-  container.querySelectorAll('pre code.language-svg').forEach(el => {
-    const pre = el.parentElement;
-    const wrap = document.createElement('div');
-    wrap.className = 'my-4 bg-white rounded-xl overflow-hidden border border-slate-700 p-4 relative flex flex-col items-center';
-    
-    try {
-      const cleanSvg = DOMPurify.sanitize(el.innerText, SVG_OPTS);
-      const div = document.createElement('div');
-      div.innerHTML = cleanSvg;
-      const svg = div.querySelector('svg');
-      
-      if (svg) {
-        svg.style.maxWidth = '100%'; 
-        svg.style.height = 'auto';
-        wrap.appendChild(svg);
-        
-        const btnWrap = document.createElement('div');
-        btnWrap.className = 'flex gap-2 mt-4 w-full justify-center border-t border-slate-200 pt-3';
-        
-        const dlSvg = document.createElement('button');
-        dlSvg.className = 'text-xs font-bold bg-slate-800 text-white px-4 py-1.5 rounded-lg hover:bg-slate-700 transition';
-        dlSvg.innerHTML = '<i class="fas fa-download me-1"></i> SVG';
-        dlSvg.onclick = () => downloadSvg(svg, 'illustration.svg');
-        
-        const dlPng = document.createElement('button');
-        dlPng.className = 'text-xs font-bold bg-sky-600 text-white px-4 py-1.5 rounded-lg hover:bg-sky-500 transition';
-        dlPng.innerHTML = '<i class="fas fa-image me-1"></i> PNG';
-        dlPng.onclick = () => svgToPng(svg, 'illustration.png');
-        
-        btnWrap.append(dlSvg, dlPng);
-        wrap.appendChild(btnWrap);
-        pre.replaceWith(wrap);
-      }
-    } catch(e) {}
-  });
-
-  if (window.mermaid) {
-    container.querySelectorAll('pre code.language-mermaid').forEach(async el => {
-      const pre = el.parentElement;
-      const src = el.innerText;
-      const id = 'mer-' + uid();
-      
-      const wrap = document.createElement('div');
-      wrap.className = 'my-4 bg-slate-900 rounded-xl overflow-hidden border border-slate-700 p-4 flex flex-col items-center';
-      
-      const target = document.createElement('div');
-      target.id = id;
-      wrap.appendChild(target);
-      pre.replaceWith(wrap);
-      
-      try {
-        const { svg } = await mermaid.render(id, src);
-        target.innerHTML = DOMPurify.sanitize(svg, SVG_OPTS);
-        const svgEl = target.querySelector('svg');
-        
-        if (svgEl) {
-          svgEl.style.maxWidth = '100%'; 
-          svgEl.style.height = 'auto';
-          
-          const btnWrap = document.createElement('div');
-          btnWrap.className = 'flex gap-2 mt-4 justify-center w-full border-t border-slate-800 pt-3';
-          
-          const dlPng = document.createElement('button');
-          dlPng.className = 'text-xs font-bold bg-sky-600 text-white px-4 py-1.5 rounded-lg hover:bg-sky-500 transition';
-          dlPng.innerHTML = '<i class="fas fa-image me-1"></i> PNG';
-          dlPng.onclick = () => svgToPng(svgEl, 'diagram.png');
-          
-          btnWrap.appendChild(dlPng);
-          wrap.appendChild(btnWrap);
-        }
-      } catch(e) { 
-        wrap.innerHTML = '<div class="text-rose-400 text-xs p-2 font-mono"><i class="fas fa-times-circle me-1"></i> Mermaid Syntax Error</div>'; 
-      }
-    });
-  }
-}
-
-function actionsBar(m) {
+function diagramBox(svgMarkup, pre) {
+  const view = document.createElement('div');
+  view.className = 'bg-white rounded-2xl p-3 overflow-auto border border-slate-700';
+  view.style.direction = 'ltr';
+  view.innerHTML = svgMarkup;
+  const svg = view.querySelector('svg');
+  if (!svg) return;
+  svg.style.maxWidth = '100%'; svg.style.height = 'auto';
+  const box = document.createElement('div');
+  box.className = 'my-3';
   const bar = document.createElement('div');
-  bar.className = 'flex gap-3 mt-2 pt-2 border-t border-slate-800/70';
-  
-  const mkBtn = (icon, text, fn) => {
+  bar.className = 'flex gap-2 mt-2 text-[11px]';
+  const mk = (label, fn) => {
     const b = document.createElement('button');
-    b.className = 'text-[11px] font-medium flex items-center gap-1.5 text-slate-400 hover:text-sky-400 transition';
-    b.innerHTML = `<i class="fas ${icon}"></i> ${text}`;
-    b.onclick = fn;
+    b.className = 'px-2.5 py-1 rounded-lg border border-slate-700 text-slate-400 hover:text-white hover:bg-slate-800 transition';
+    b.textContent = label; b.onclick = fn;
     return b;
   };
-  
-  bar.appendChild(mkBtn('fa-file-pdf', 'Export PDF', () => {
-     const w = window.open('', '_blank');
-     w.document.write(`<html><head><title>Export</title><style>body{font-family:sans-serif;padding:40px;line-height:1.6;color:#111;} pre{background:#f4f4f4;padding:15px;border-radius:8px;} table{border-collapse:collapse;width:100%} th,td{border:1px solid #ddd;padding:8px}</style></head><body>${renderMd(m.content)}</body></html>`);
-     w.document.close();
-     setTimeout(() => w.print(), 500);
-  }));
-  
-  bar.appendChild(mkBtn('fa-file-word', 'Export Word', () => {
-     const html = `<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export</title></head><body style="font-family:sans-serif">${renderMd(m.content)}</body></html>`;
-     const blob = new Blob(['\ufeff', html], { type: 'application/msword' });
-     saveBlob(blob, 'OUARRACH_AI_Export.doc');
-  }));
-  
-  return bar;
+  bar.append(
+    mk('⬇ PNG', () => svgToPng(svg, 'ouarrach-diagram.png')),
+    mk('⬇ SVG', () => downloadSvg(svg, 'ouarrach-diagram.svg')),
+    mk('</> Code', () => { pre.style.display = pre.style.display === 'none' ? '' : 'none'; })
+  );
+  box.append(view, bar);
+  pre.style.display = 'none';
+  pre.before(box);
+}
+async function renderDiagrams(el, m) {
+  m._mer = m._mer || [];
+  let mi = 0;
+  for (const code of [...el.querySelectorAll('pre code')]) {
+    const cls = code.className || '';
+    const pre = code.parentElement;
+    try {
+      if (/language-svg/.test(cls)) {
+        const clean = DOMPurify.sanitize(code.textContent, SVG_OPTS);
+        if (clean.includes('<svg')) diagramBox(clean, pre);
+      } else if (/language-mermaid/.test(cls) && window.mermaid) {
+        const idx = mi++;
+        const id = 'mmd' + uid();
+        try {
+          const { svg } = await mermaid.render(id, code.textContent);
+          m._mer[idx] = svg;
+          diagramBox(svg, pre);
+        } finally { const junk = document.getElementById('d' + id); if (junk) junk.remove(); }
+      }
+    } catch (e) { /* keep the code visible if it cannot be drawn */ }
+  }
+}
+function paintFinal(el, m) {
+  el.innerHTML = renderMd(m.content);
+  renderDiagrams(el, m);
+  enhance(el);
 }
 
+/* ================= Actions, exports, illustration mode ================= */
 function toggleImgMode() {
   imgMode = !imgMode;
   const b = $('#imgBtn');
-  if (imgMode) b.classList.replace('text-slate-400', 'text-purple-400');
-  else b.classList.replace('text-purple-400', 'text-slate-400');
+  b.classList.toggle('text-purple-400', imgMode);
+  b.classList.toggle('bg-slate-800', imgMode);
+  $('#input').placeholder = imgMode ? 'Describe what to draw… / صف ما تريد رسمه…' : 'Ask anything… / اسأل أي سؤال… / Pose ta question…';
+  $('#input').focus();
+}
+function actionsBar(m) {
+  const bar = document.createElement('div');
+  bar.className = 'actions flex gap-2 mt-2 text-[11px]';
+  const mk = (icon, label, fn) => {
+    const b = document.createElement('button');
+    b.className = 'px-2.5 py-1 rounded-lg border border-slate-700 text-slate-400 hover:text-white hover:bg-slate-800 transition';
+    b.innerHTML = '<i class="fas ' + icon + ' me-1"></i>' + label;
+    b.onclick = () => fn(b);
+    return b;
+  };
+  bar.append(
+    mk('fa-copy', 'Copy', async (b) => { try { await navigator.clipboard.writeText(m.content); b.lastChild.textContent = 'Copied ✓'; setTimeout(() => b.lastChild.textContent = 'Copy', 1500); } catch {} }),
+    mk('fa-file-pdf', 'PDF', () => exportDoc('pdf', m)),
+    mk('fa-file-word', 'Word', () => exportDoc('doc', m))
+  );
+  return bar;
+}
+function exportDoc(kind, m) {
+  const diagrams = [];
+  let mer = 0;
+  const md = (m.content || '')
+    .replace(/```svg[ \t]*\n([\s\S]*?)```/g, (_, s) => { diagrams.push(DOMPurify.sanitize(s, SVG_OPTS)); return '\n\n@@DIAG' + (diagrams.length - 1) + '@@\n\n'; })
+    .replace(/```mermaid[ \t]*\n[\s\S]*?```/g, (blk) => {
+      const s = m._mer && m._mer[mer]; mer++;
+      if (!s) return blk;
+      diagrams.push(s); return '\n\n@@DIAG' + (diagrams.length - 1) + '@@\n\n';
+    });
+  const body = renderMd(md).replace(/@@DIAG(\d+)@@/g, (_, i) => diagrams[+i]);
+  const html = '<!DOCTYPE html><html><head><meta charset="utf-8"><title>OUARRACH AI</title><style>' +
+    'body{font-family:Arial,Tahoma,sans-serif;line-height:1.7;padding:24px;color:#111}h1,h2,h3{color:#0b3d91}' +
+    'pre{background:#f3f4f6;padding:10px;border-radius:6px;white-space:pre-wrap;direction:ltr;text-align:left}' +
+    'code{background:#f3f4f6;padding:1px 4px}table{border-collapse:collapse}td,th{border:1px solid #999;padding:6px}svg{max-width:100%;height:auto}' +
+    '</style></head><body dir="auto">' + body + '</body></html>';
+  if (kind === 'doc') {
+    saveBlob(new Blob(['﻿', html], { type: 'application/msword' }), 'ouarrach-ai.doc');
+  } else {
+    const f = document.createElement('iframe');
+    f.style.cssText = 'position:fixed;right:0;bottom:0;width:0;height:0;border:0';
+    document.body.appendChild(f);
+    f.contentDocument.open(); f.contentDocument.write(html); f.contentDocument.close();
+    setTimeout(() => { f.contentWindow.focus(); f.contentWindow.print(); setTimeout(() => f.remove(), 3000); }, 400);
+  }
 }
 
-/* ================= Chat Engine ================= */
+/* ================= Sending ================= */
+function onSendClick() { busy ? (stopFlag = true) : send(); }
+function setBusy(v) { busy = v; $('#sendIcon').className = v ? 'fas fa-stop' : 'fas fa-arrow-up'; }
+function hintFor(msg) {
+  if (/429|quota|rate|exhaust|limit|credit|insufficient/i.test(msg)) return '⏳ Limit reached for now. Wait a minute and try again.';
+  if (/404|not found|model/i.test(msg)) return '🔁 Service problem. Try again in a moment.';
+  if (/Failed to fetch|NetworkError|load failed/i.test(msg)) return '🌐 Network problem (internet, VPN or blocked site). Check your connection and try again.';
+  return 'Try again, or switch Fast / Smart at the top.';
+}
+
 async function send() {
-  if (busy) { stopFlag = true; return; }
-  
-  const inp = $('#input');
-  let text = inp.value.trim();
+  if (busy) return;
+  const input = $('#input');
+  const text = input.value.trim();
   if (!text && !attached) return;
 
-  const sel = $('#modelSelect').value;
-  if (imgMode) text += ' (Please generate a highly detailed, colored SVG illustration block for this request).';
+  const tier = $('#modelSelect').value === 'smart' ? 'smart' : 'fast';
 
-  if (!chats.length || !currentId) newChat();
-  const c = cur();
-  
-  if (!c.title) c.title = text.slice(0, 35) + (text.length > 35 ? '...' : '') || (attached ? attached.name : 'New Chat');
+  if (!cur()) { const c = { id: uid(), title: '', messages: [] }; chats.push(c); currentId = c.id; }
+  const chat = cur();
 
-  const uMsg = { role: 'user', content: text, shown: text };
+  let content = text || 'Please analyze the attached file.';
+  if (imgMode) content = 'Draw this as a beautiful, detailed, complete SVG illustration (one svg code block), then add a one-line description: ' + content;
+  let image = null, fileName = null;
   if (attached) {
-    if (attached.type === 'text') uMsg.content = `[Attached File: ${attached.name}]\n\n${attached.text}\n\nUser Question:\n${text}`;
-    if (attached.type === 'image') uMsg.image = attached.dataUrl;
-    uMsg.file = attached.name;
-    removeFile();
+    fileName = attached.name;
+    if (attached.type === 'text') content += `\n\n[Attached file: ${attached.name}]\n${attached.text}`;
+    else image = attached.dataUrl;
   }
-  c.messages.push(uMsg);
 
+  chat.messages.push({ role: 'user', content, shown: text, file: fileName });
+  if (!chat.title) chat.title = (text || fileName || 'New chat').slice(0, 40);
   const aiMsg = { role: 'assistant', content: '' };
-  c.messages.push(aiMsg);
-  save(); 
+  chat.messages.push(aiMsg);
+
+  input.value = ''; input.style.height = 'auto'; removeFile();
+  if (imgMode) toggleImgMode();
   renderAll();
 
-  inp.value = ''; 
-  inp.style.height = 'auto';
-  busy = true; 
-  stopFlag = false;
-  
-  const icon = $('#sendIcon'); 
-  icon.className = 'fas fa-square text-xs'; 
+  const bubble = $('#messages').lastElementChild.querySelector('.md');
+  bubble.classList.add('typing');
+  setBusy(true); stopFlag = false;
+
+  const history = chat.messages.slice(0, -1).slice(-14).map(m => ({ role: m.role, content: m.content, err: m.err }));
 
   try {
-    const stream = await getStream(sel, c.messages.slice(0, -1), uMsg.image, uMsg.content);
-    for await (const chunk of stream) {
-      if (stopFlag) break;
-      aiMsg.content += chunk.text || '';
-      renderMessages();
+    const resp = chatStream(tier, history, image);
+    let pending = false;
+    const paint = () => { pending = false; bubble.innerHTML = renderMd(aiMsg.content); scrollDown(false); };
+    if (resp && typeof resp[Symbol.asyncIterator] === 'function') {
+      for await (const part of resp) {
+        if (stopFlag) break;
+        if (part?.text) {
+          aiMsg.content += part.text;
+          if (!pending) { pending = true; requestAnimationFrame(paint); }
+        }
+      }
+    } else {
+      const c = resp?.message?.content;
+      aiMsg.content = typeof c === 'string' ? c : Array.isArray(c) ? c.map(x => x.text || '').join('') : String(resp?.text ?? resp ?? '');
     }
-  } catch (e) {
+    if (!aiMsg.content.trim()) aiMsg.content = stopFlag ? '_(stopped)_' : '_(empty response — try again)_';
+  } catch (err) {
+    const msg = errMsg(err);
     aiMsg.err = true;
-    aiMsg.content = errMsg(e);
+    aiMsg.content = (aiMsg.content ? aiMsg.content + '\n\n' : '') + '⚠️ **Error:** ' + msg + '\n\n' + hintFor(msg);
+  } finally {
+    bubble.classList.remove('typing');
+    paintFinal(bubble, aiMsg);
+    if (aiMsg.content && !bubble.parentElement.querySelector('.actions')) bubble.parentElement.appendChild(actionsBar(aiMsg));
+    setBusy(false); stopFlag = false;
+    save(); renderList(); scrollDown(false);
   }
-
-  busy = false; 
-  stopFlag = false;
-  icon.className = 'fas fa-arrow-up';
-  save(); 
-  renderAll();
 }
 
-function onSendClick() { send(); }
-
-/* ================= Event Listeners & Init ================= */
-$('#input').addEventListener('keydown', e => {
-  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); }
+/* ================= Init ================= */
+const ta = $('#input');
+ta.addEventListener('input', () => { ta.style.height = 'auto'; ta.style.height = Math.min(ta.scrollHeight, 192) + 'px'; });
+ta.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); send(); }
 });
-$('#input').addEventListener('input', function() {
-  this.style.height = 'auto';
-  this.style.height = Math.min(this.scrollHeight, 150) + 'px';
-});
+try { const m = localStorage.getItem(LS_MODEL); if (m && [...$('#modelSelect').options].some(o => o.value === m)) $('#modelSelect').value = m; } catch {}
+$('#modelSelect').addEventListener('change', (e) => { try { localStorage.setItem(LS_MODEL, e.target.value); } catch {} });
+try { if (window.mermaid) mermaid.initialize({ startOnLoad: false, securityLevel: 'strict', theme: 'default', flowchart: { htmlLabels: false } }); } catch {}
 
 load();
 if (chats.length) currentId = chats[chats.length - 1].id;
 renderAll();
+
+[['marked', 'Markdown renderer'], ['DOMPurify', 'Sanitizer'], ['hljs', 'Code highlighter'], ['pdfjsLib', 'PDF reader'], ['mammoth', 'DOCX reader'], ['mermaid', 'Diagram renderer']]
+  .forEach(([k, label]) => { if (!window[k]) diag(label + ' failed to load (internet/CDN blocked?).'); });
+
 </script>
 </body>
 </html>
