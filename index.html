@@ -1,570 +1,153 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OUARRACH AI</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
-<!-- AI engine: no backend, no API key (user-pays model) -->
-<script src="https://js.puter.com/v2/"></script>
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700&display=swap');
-  html, body { height: 100%; }
-  body { font-family: 'Plus Jakarta Sans', 'Tajawal', sans-serif; background: #0b0f19; color: #cbd5e1; }
-  ::-webkit-scrollbar { width: 6px; height: 6px; }
-  ::-webkit-scrollbar-thumb { background: rgba(255,255,255,.14); border-radius: 9999px; }
-  .brand-grad { background: linear-gradient(135deg, #0ea5e9, #6366f1 55%, #a855f7); }
-  .md { line-height: 1.7; font-size: 14.5px; word-break: break-word; }
-  .md > *:first-child { margin-top: 0; } .md > *:last-child { margin-bottom: 0; }
-  .md p { margin: .55em 0; }
-  .md ul { list-style: disc; padding-inline-start: 1.4em; margin: .5em 0; }
-  .md ol { list-style: decimal; padding-inline-start: 1.4em; margin: .5em 0; }
-  .md li { margin: .2em 0; }
-  .md h1, .md h2, .md h3 { color: #fff; font-weight: 700; margin: 1em 0 .4em; }
-  .md h1 { font-size: 1.3em; } .md h2 { font-size: 1.15em; } .md h3 { font-size: 1.05em; }
-  .md a { color: #38bdf8; text-decoration: underline; }
-  .md blockquote { border-inline-start: 3px solid #334155; padding-inline-start: 12px; color: #94a3b8; margin: .6em 0; }
-  .md table { border-collapse: collapse; margin: .7em 0; display: block; overflow-x: auto; }
-  .md th, .md td { border: 1px solid #334155; padding: 6px 10px; }
-  .md th { background: #111827; color: #fff; }
-  .md code { background: #111827; padding: 1px 6px; border-radius: 6px; font-family: ui-monospace, Menlo, monospace; font-size: .9em; color: #7dd3fc; }
-  .md pre { position: relative; background: #0d1117; border: 1px solid #1f2937; border-radius: 12px; margin: .8em 0; overflow: hidden; direction: ltr; text-align: left; }
-  .md pre code { display: block; background: transparent; padding: 14px; overflow-x: auto; color: inherit; font-size: 12.5px; }
-  .copy-btn { position: absolute; top: 6px; right: 6px; font-size: 11px; padding: 3px 9px; border-radius: 8px; background: #1f2937; color: #cbd5e1; border: 1px solid #334155; cursor: pointer; }
-  .copy-btn:hover { background: #334155; color: #fff; }
-  .typing::after { content: '▍'; animation: blink 1s steps(2) infinite; color: #38bdf8; }
-  @keyframes blink { 50% { opacity: 0; } }
-  textarea { resize: none; }
+<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Navix Media | تنمية حسابات السوشيال ميديا بأسعار مغربية</title>
+<meta name="description" content="Navix Media: متابعون، إعجابات ومشاهدات لتيك توك وإنستغرام وفيسبوك ويوتيوب، مع مواقع وتصميم وإعلانات. اطلب بدون حساب وادفع عبر CIH أو CashPlus أو Wafacash.">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet"><meta name="theme-color" content="#060508">
+<style>:root{--bg:#060508;--ink:#f3f2ee;--mu:#8d8c87;--ln:rgba(255,255,255,.09);--lime:#c6f23d;--lime2:#a8d82a;--glass:rgba(255,255,255,.035);--navy:#c6f23d;--gold:#c6f23d}*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{font-family:'Inter','Cairo',sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased}html[lang=ar] body,html[lang=ar] input,html[lang=ar] select,html[lang=ar] textarea,html[lang=ar] .btn{font-family:'Cairo',sans-serif}a{text-decoration:none;color:inherit}
+body:before{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(circle at 1px 1px,rgba(255,255,255,.06) 1px,transparent 0) 0 0/28px 28px,radial-gradient(60% 40% at 50% 100%,rgba(120,160,20,.16),transparent 70%)}
+nav{position:sticky;top:0;z-index:40;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 5%;background:rgba(6,5,8,.72);backdrop-filter:blur(14px);border-bottom:1px solid var(--ln)}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px;direction:ltr;letter-spacing:.5px}.logo svg{width:30px}.logo b{color:#fff}.logo span{color:var(--lime)}
+.links{display:flex;gap:26px;font-weight:600;font-size:14px;color:var(--mu)}.links a:hover{color:#fff}.rt{display:flex;gap:8px;align-items:center}
+.ic{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:17px;cursor:pointer;border:1px solid var(--ln);background:var(--glass)}.ic.w{color:#25D366}.ic.w svg{width:21px}.ic.m{color:var(--lime)}.ic:hover{border-color:var(--lime)}
+.lang{display:flex;background:var(--glass);border:1px solid var(--ln);border-radius:30px;padding:3px}.lang button{border:0;background:none;font:700 12px 'JetBrains Mono',monospace;padding:6px 10px;border-radius:30px;cursor:pointer;color:var(--mu)}.lang button.on{background:var(--lime);color:#0a0a0a}
+.btn{background:var(--lime);color:#0a0a0a;border:0;border-radius:40px;padding:13px 26px;font:700 15px 'Inter','Cairo';cursor:pointer;display:inline-block;transition:.2s;box-shadow:0 0 0 0 rgba(198,242,61,.4)}.btn.o{background:var(--glass);border:1px solid var(--ln);color:#fff}.btn.d{background:var(--glass);border:1px solid var(--ln);color:#fff}.btn.sm{background:var(--lime);color:#0a0a0a;border:0;padding:10px 22px}.btn:hover{box-shadow:0 0 24px rgba(198,242,61,.35);transform:translateY(-1px)}.btn.d:hover,.btn.o:hover{border-color:var(--lime);color:var(--lime)}
+.hero{position:relative;overflow:hidden;padding:110px 5% 100px;display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:center;background:radial-gradient(50% 60% at 78% 45%,rgba(160,210,30,.18),transparent 70%)}
+.hero>*{position:relative;z-index:1}.streaks{position:absolute!important;z-index:0!important;inset:0;width:100%;height:100%;pointer-events:none;opacity:.9}
+.pill{display:inline-flex;align-items:center;gap:8px;background:var(--glass);color:#cfd0c8;border:1px solid var(--ln);border-radius:10px;padding:7px 14px;font:500 12.5px 'JetBrains Mono',monospace;margin-bottom:22px}.pill:before{content:"";width:6px;height:6px;border-radius:50%;background:var(--lime);box-shadow:0 0 8px var(--lime)}
+h1{font-size:clamp(36px,5.6vw,68px);line-height:1.12;font-weight:600;letter-spacing:-1.5px;margin-bottom:22px}h1 b{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;color:#fff;letter-spacing:-.5px}html[lang=ar] h1{letter-spacing:0;line-height:1.4;font-weight:800}html[lang=ar] h1 b{font-family:'Cairo';font-style:normal;font-weight:900;color:var(--lime)}
+.sub{font-size:17px;line-height:1.8;color:var(--mu);max-width:520px;margin-bottom:30px}.cta{display:flex;gap:12px;flex-wrap:wrap}
+.tr{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}.tr span{font:500 12px 'JetBrains Mono',monospace;color:var(--mu);border:1px solid var(--ln);background:var(--glass);border-radius:8px;padding:7px 12px}
+.vis{background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02));border:1px solid var(--ln);border-radius:22px;padding:22px;backdrop-filter:blur(14px);box-shadow:0 30px 80px rgba(0,0,0,.5)}.vh{display:flex;justify-content:space-between;direction:ltr;font:500 12px 'JetBrains Mono',monospace;color:var(--mu);margin-bottom:22px}.vh em{font-style:normal;color:var(--lime)}
+.vis .bars{direction:ltr;display:flex;align-items:flex-end;gap:12px;height:190px}.vis .bars i{flex:1;background:linear-gradient(180deg,var(--lime),rgba(198,242,61,.12));border-radius:8px 8px 3px 3px;animation:gr 1.6s cubic-bezier(.2,.7,.2,1) both}
+@keyframes gr{from{height:0!important}}.vis .row{display:flex;justify-content:space-between;margin-top:18px;font:500 13px 'JetBrains Mono',monospace;color:var(--mu);direction:ltr}.vis .row b{color:var(--lime)}
+section{padding:90px 5%}.alt{background:rgba(255,255,255,.02);border-block:1px solid var(--ln)}.hd{text-align:center;max-width:680px;margin:0 auto 46px}.hd h2{font-size:clamp(28px,4.2vw,44px);font-weight:600;letter-spacing:-1px;margin-bottom:12px}html[lang=ar] .hd h2{font-weight:800;letter-spacing:0}.hd p{color:var(--mu);line-height:1.7}
+.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;max-width:1100px;margin:0 auto}
+.card{background:var(--glass);border:1px solid var(--ln);border-radius:20px;padding:24px;backdrop-filter:blur(8px)}.pc{text-align:center;transition:transform .2s,border-color .2s,box-shadow .2s}.pc:hover{transform:translateY(-4px);border-color:rgba(198,242,61,.6);box-shadow:0 10px 40px rgba(198,242,61,.08)}
+.pc .i{width:54px;height:54px;border-radius:16px;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-size:25px;font-weight:800;color:#fff;border:1px solid rgba(255,255,255,.15)}.pc h3{font-size:19px;font-weight:600}.pc .p{margin:8px 0 18px;color:var(--mu);font-size:12px;font-family:'JetBrains Mono',monospace}.pc .p b{display:block;font:600 24px 'Inter';color:var(--lime);direction:ltr;margin-top:4px}
+.pay{background:radial-gradient(60% 80% at 50% 0,rgba(160,210,30,.10),transparent 70%)}.pay .card{color:#fff}.pay h3{margin-bottom:12px;font-size:21px;font-weight:600}.pay .f{font:500 11px 'JetBrains Mono',monospace;color:var(--mu);margin-top:12px;text-transform:uppercase;letter-spacing:.5px}.pay .v{font-weight:600;direction:ltr;word-break:break-all;margin-top:3px}.pay .btn{margin-top:16px;padding:9px 18px;font-size:13px}
+.st{counter-reset:s}.st .card{position:relative;padding-top:44px}.st .card:before{counter-increment:s;content:"0" counter(s);position:absolute;top:18px;inset-inline-start:24px;font:500 12px 'JetBrains Mono',monospace;color:var(--lime)}.card h4{font-size:18px;font-weight:600;margin-bottom:8px}.card p{color:var(--mu);line-height:1.7;font-size:14.5px}
+.faq{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:12px}.faq .card h4{color:#fff}
+.band{text-align:center;background:radial-gradient(50% 90% at 50% 100%,rgba(198,242,61,.22),transparent 70%)}.band p{color:var(--mu);margin:10px 0 26px}
+footer{border-top:1px solid var(--ln);color:var(--mu);padding:30px 5%;display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font:500 13px 'JetBrains Mono',monospace}
+.fw{position:fixed;bottom:20px;inset-inline-start:20px;z-index:45;width:58px;height:58px;background:#25D366;color:#fff!important;border:0;box-shadow:0 8px 24px rgba(0,0,0,.5);animation:pu 2.4s infinite}.fw svg{width:30px}@keyframes pu{70%{box-shadow:0 8px 24px rgba(0,0,0,.5),0 0 0 14px rgba(37,211,102,0)}}
+.md{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.78);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:14px}.md.on{display:flex}.box{background:#0e0d12;border:1px solid var(--ln);border-radius:22px;width:100%;max-width:520px;max-height:94vh;overflow:auto;padding:26px;position:relative;box-shadow:0 0 80px rgba(198,242,61,.08)}.box h3{font-size:22px;margin-bottom:16px}.x{position:absolute;top:14px;inset-inline-end:16px;background:none;border:0;font-size:22px;cursor:pointer;color:var(--mu)}
+label{display:block;font-weight:600;font-size:13px;margin:12px 0 6px;color:var(--mu)}input,select,textarea{width:100%;border:1px solid var(--ln);background:rgba(255,255,255,.04);border-radius:12px;padding:12px;font:500 15px 'Inter','Cairo';color:var(--ink)}input:focus,select:focus,textarea:focus{outline:0;border-color:var(--lime)}option{background:#111;color:#fff}
+.tot{display:flex;justify-content:space-between;align-items:center;background:rgba(198,242,61,.07);border:1px solid rgba(198,242,61,.25);border-radius:14px;padding:14px;margin:16px 0;font-weight:700}.tot b{font-size:24px;color:var(--lime);direction:ltr}.er{background:rgba(255,70,90,.12);color:#ff8a98;padding:12px;border-radius:12px;font-weight:600;margin-bottom:10px}.ok{background:rgba(198,242,61,.1);color:var(--lime);padding:14px;border-radius:12px;font-weight:700;margin-bottom:12px;line-height:1.7}
+@media(max-width:860px){.links{display:none}.hero{grid-template-columns:1fr;padding:60px 5%;text-align:center}.sub{margin-inline:auto}.cta,.tr{justify-content:center}section{padding:60px 5%}.lang button{padding:5px 7px}.btn.sm{display:none}nav{padding:10px 4%;gap:6px}.logo{font-size:15px;gap:6px}.logo svg{width:22px}.rt{gap:5px}.ic.m{display:none}.ic{width:34px;height:34px}.lang button{font-size:11px;padding:5px 6px}.hero{padding-top:44px}.vis{padding:16px}}
+.hero:after{content:"";position:absolute;inset-inline-end:-8%;top:5%;width:62%;height:90%;background:radial-gradient(closest-side,rgba(198,242,61,.17),transparent);animation:orb 7s ease-in-out infinite alternate;pointer-events:none}@keyframes orb{from{transform:scale(.9);opacity:.6}to{transform:scale(1.12);opacity:1}}
+.streaks{transition:transform .8s cubic-bezier(.2,.7,.2,1)}.streaks path.b{stroke-opacity:.16}.streaks path.f{stroke-dasharray:150 750;stroke-linecap:round;animation:fl 9s linear infinite}.streaks path.f:nth-of-type(3n){animation-duration:13s}.streaks path.f:nth-of-type(3n+1){animation-duration:7s;animation-delay:-3s}.streaks path.f:nth-of-type(4n){animation-duration:16s;animation-delay:-6s}@keyframes fl{to{stroke-dashoffset:-900}}
+.hero>div:first-child>*{animation:up .9s cubic-bezier(.2,.7,.2,1) both}.hero>div:first-child>*:nth-child(2){animation-delay:.1s}.hero>div:first-child>*:nth-child(3){animation-delay:.2s}.hero>div:first-child>*:nth-child(4){animation-delay:.3s}.hero>div:first-child>*:nth-child(5){animation-delay:.4s}@keyframes up{from{opacity:0;transform:translateY(24px)}}
+.vis{animation:up 1s .3s cubic-bezier(.2,.7,.2,1) both,flt 7s 1.3s ease-in-out infinite alternate}@keyframes flt{to{transform:translateY(-10px)}}
+.flow{position:relative;direction:ltr;aspect-ratio:400/230;width:100%}.flow svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}.flow path{fill:none;stroke:rgba(198,242,61,.45);stroke-width:1.5}
+.nd{position:absolute;width:29%;min-height:19%;display:flex;flex-direction:column;justify-content:center;gap:2px;padding:8px 10px;border-radius:12px;background:rgba(14,13,18,.85);border:1px solid var(--ln);font-weight:600;font-size:12.5px;line-height:1.25;animation:act 3.6s infinite}.nd small{font:500 10px 'JetBrains Mono',monospace;color:var(--mu)}.n1{left:0;top:8%}.n2{left:35.5%;top:40.5%;animation-delay:1.2s}.n3{left:71%;top:72%;animation-delay:2.4s}
+@keyframes act{0%,30%{border-color:var(--lime);box-shadow:0 0 22px rgba(198,242,61,.3)}38%,100%{border-color:rgba(255,255,255,.09);box-shadow:none}}
+.vis .bars{height:70px;margin-top:20px}.vis .bars i{animation:gr 1.6s cubic-bezier(.2,.7,.2,1) both,pl 3s 2s ease-in-out infinite alternate}@keyframes pl{to{opacity:.65}}
+.mq{overflow:hidden;border-block:1px solid var(--ln);padding:18px 0;direction:ltr;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}.mt{display:flex;width:max-content;animation:mq 34s linear infinite}.mt span{padding-inline-end:56px;font:500 13px 'JetBrains Mono',monospace;color:var(--mu);text-transform:uppercase;letter-spacing:1.5px}.mt span:before{content:"◆";color:var(--lime);margin-inline-end:56px;font-size:8px;vertical-align:middle}@keyframes mq{to{transform:translateX(-50%)}}
+.card{background:radial-gradient(240px circle at var(--mx,50%) var(--my,-80%),rgba(198,242,61,.10),transparent 70%),var(--glass)}
+.calc{display:grid;grid-template-columns:1.4fr 1fr;gap:28px;padding:30px}.calc label:first-child{margin-top:0}.rl{display:flex;justify-content:space-between;direction:ltr;font:500 11px 'JetBrains Mono',monospace;color:var(--mu)}
+input[type=range]{-webkit-appearance:none;appearance:none;height:4px;border:0;padding:0;border-radius:4px;background:rgba(255,255,255,.12);direction:ltr;margin:18px 0 10px}input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 7px rgba(198,242,61,.18);cursor:pointer}input[type=range]::-moz-range-thumb{width:22px;height:22px;border:0;border-radius:50%;background:var(--lime);box-shadow:0 0 0 7px rgba(198,242,61,.18);cursor:pointer}
+.cr{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:8px;text-align:center;border-radius:16px;padding:24px;background:rgba(198,242,61,.06);border:1px solid rgba(198,242,61,.25)}.cr .f{font:500 11px 'JetBrains Mono',monospace;color:var(--mu);text-transform:uppercase;letter-spacing:.5px}.cr b{font:600 44px 'Inter';color:var(--lime);direction:ltr;letter-spacing:-1px}.cr .btn{margin-top:10px;width:100%;text-align:center}
+.rv{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.2,.7,.2,1) var(--d,0s),transform .8s cubic-bezier(.2,.7,.2,1) var(--d,0s),border-color .2s,box-shadow .2s}.rv.in{opacity:1;transform:none}.pc.rv.in:hover{transform:translateY(-4px)}
+@media(max-width:860px){.calc{grid-template-columns:1fr;padding:20px}.nd{font-size:11px;padding:6px 8px}}
+@media(max-width:860px){.streaks{opacity:.4}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
 </style>
-</head>
-<body class="h-screen flex overflow-hidden">
-
-<!-- Sidebar -->
-<aside id="sidebar" class="fixed md:static inset-y-0 start-0 z-30 w-72 -translate-x-full md:translate-x-0 rtl:translate-x-full md:rtl:translate-x-0 transition-transform bg-[#0a0d16] border-e border-slate-800/70 flex flex-col p-4 gap-3">
-  <div class="flex items-center gap-3 px-1 py-1">
-    <div class="w-9 h-9 rounded-2xl brand-grad flex items-center justify-center text-white font-extrabold shadow-lg shadow-sky-500/20">O</div>
-    <div class="flex-1">
-      <h1 class="font-extrabold text-sm tracking-wider text-white">OUARRACH.ME</h1>
-      <p class="text-[10px] font-bold text-sky-400">AI Chat · Scholar Hub</p>
-    </div>
-    <button class="md:hidden text-slate-400" onclick="toggleSidebar(false)"><i class="fas fa-times"></i></button>
-  </div>
-
-  <button onclick="newChat()" class="brand-grad text-white font-bold text-sm rounded-xl py-2.5 flex items-center justify-center gap-2 hover:opacity-90 transition">
-    <i class="fas fa-plus text-xs"></i> New chat
-  </button>
-
-  <div id="chatList" class="flex-1 overflow-y-auto space-y-1 -mx-1 px-1"></div>
-
-  <div class="border-t border-slate-800/70 pt-3 space-y-2 text-xs">
-    <button onclick="clearAll()" class="w-full text-start text-slate-500 hover:text-rose-400 transition"><i class="fas fa-trash-can me-2"></i>Clear all chats</button>
-    <a href="mailto:ouarrachayoub42@gmail.com" class="block text-slate-400 hover:text-white transition"><i class="fas fa-envelope me-2 text-sky-400"></i>ouarrachayoub42@gmail.com</a>
-    <a href="https://wa.me/212667903785" target="_blank" rel="noopener" class="block text-slate-400 hover:text-white transition"><i class="fab fa-whatsapp me-2 text-emerald-400"></i><span dir="ltr">+212 667-903785</span></a>
-  </div>
-</aside>
-<div id="backdrop" class="hidden fixed inset-0 bg-black/60 z-20 md:hidden" onclick="toggleSidebar(false)"></div>
-
-<!-- Main -->
-<div class="flex-1 flex flex-col min-w-0">
-  <header class="px-4 md:px-6 py-3 flex items-center gap-3 border-b border-slate-800/70 bg-[#0b0f19]/90 backdrop-blur">
-    <button class="md:hidden text-slate-300 text-lg" onclick="toggleSidebar(true)"><i class="fas fa-bars"></i></button>
-    <div class="flex items-center gap-2 text-white font-bold text-sm">
-      <i class="fas fa-brain text-purple-400"></i> OUARRACH AI
-      <span class="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 text-[10px] font-bold border border-emerald-500/20">Real AI</span>
-    </div>
-    <div class="flex-1"></div>
-    <label class="text-xs text-slate-400 hidden sm:block">Model</label>
-    <select id="modelSelect" class="bg-slate-900 border border-slate-700 rounded-lg text-xs text-slate-200 px-2 py-1.5 focus:outline-none focus:border-sky-500 max-w-[200px]">
-      <option value="anthropic/claude-sonnet-5-5">Claude Sonnet 5.5 (best)</option>
-      <option value="google/gemini-3.1-pro-preview">Gemini 3.1 Pro</option>
-      <option value="x-ai/grok-4.7">Grok 4.7</option>
-      <option value="openai/gpt-5.4-nano">GPT-5.4 nano (fast, simple)</option>
-      <option value="">Puter default (auto)</option>
-      <option value="__key__">My Anthropic API key (works everywhere)</option>
-    </select>
-  </header>
-
-  <div id="diag" class="hidden mx-4 md:mx-6 mt-3 p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs space-y-1"></div>
-
-  <!-- Messages -->
-  <main id="scroller" class="flex-1 overflow-y-auto">
-    <div id="messages" class="max-w-3xl mx-auto w-full px-4 py-6 space-y-6"></div>
-  </main>
-
-  <!-- Composer -->
-  <footer class="px-4 pb-4 pt-2">
-    <div class="max-w-3xl mx-auto">
-      <div id="fileChip" class="hidden mb-2 inline-flex items-center gap-2 bg-slate-900 border border-sky-500/40 text-sky-300 text-xs rounded-xl px-3 py-1.5">
-        <i class="fas fa-paperclip"></i><span id="fileName" class="font-bold"></span>
-        <button onclick="removeFile()" class="text-slate-400 hover:text-white"><i class="fas fa-times"></i></button>
-      </div>
-      <div class="flex items-end gap-2 bg-slate-900/90 border border-slate-700 focus-within:border-sky-500 rounded-2xl p-2 transition shadow-xl">
-        <input type="file" id="fileInput" class="hidden" accept=".pdf,.docx,.txt,.md,.csv,.json,.js,.py,.java,.c,.cpp,.html,.css,.sql,.png,.jpg,.jpeg,.webp">
-        <button onclick="document.getElementById('fileInput').click()" title="Attach PDF / DOCX / image / code" class="w-10 h-10 shrink-0 rounded-xl text-slate-400 hover:text-sky-400 hover:bg-slate-800 transition"><i class="fas fa-paperclip"></i></button>
-        <button id="imgBtn" onclick="toggleImgMode()" title="Generate image (or type /img ...)" class="w-10 h-10 shrink-0 rounded-xl text-slate-400 hover:text-purple-400 hover:bg-slate-800 transition"><i class="fas fa-image"></i></button>
-        <textarea id="input" rows="1" dir="auto" placeholder="Ask anything… / اسأل أي سؤال… / Pose ta question…" class="flex-1 bg-transparent text-sm text-slate-100 placeholder-slate-500 focus:outline-none py-2.5 max-h-48"></textarea>
-        <button id="sendBtn" onclick="onSendClick()" class="w-10 h-10 shrink-0 rounded-xl brand-grad text-white hover:opacity-90 transition flex items-center justify-center"><i id="sendIcon" class="fas fa-arrow-up"></i></button>
-      </div>
-      <p class="text-[11px] text-slate-500 text-center mt-2">OUARRACH AI can make mistakes. Check important info. · Enter = send, Shift+Enter = new line</p>
-    </div>
-  </footer>
-</div>
-
+</head><body>
+<nav><a class="logo" href="#"><svg viewBox="20 6 182 172"><path d="M30 50H62V170H30Z M30 50H66L170 170H134Z" fill="#ffffff"/><path d="M138 66H170V170H138Z M154 14L192 68H116Z" fill="#c6f23d"/></svg><b>NAVIX</b><span>MEDIA</span></a>
+<div class="links"><a href="#svc" data-i="n1"></a><a href="#pay" data-i="n2"></a><a href="#how" data-i="n3"></a><a href="#faq" data-i="n4"></a></div>
+<div class="rt"><div class="lang"><button data-l="0">عربية</button><button data-l="1">EN</button><button data-l="2">FR</button></div><a class="ic w waic" data-wa title="WhatsApp"></a><a class="ic m" data-mail title="Gmail">✉</a><a class="btn d sm" onclick="openO()" data-i="order"></a></div></nav>
+<header class="hero"><svg class="streaks" viewBox="0 0 1300 700" preserveAspectRatio="xMaxYMid slice" aria-hidden="true"><path class="b" d="M-100 443 C 380 563, 520 63, 800 143 S 1180 -117, 1400 -157" stroke="#c6f23d" stroke-width="1.0" fill="none"/><path class="b" d="M-100 452 C 380 572, 520 75, 800 152 S 1180 -102, 1400 -143" stroke="#9be22a" stroke-width="1.6" fill="none"/><path class="b" d="M-100 461 C 380 581, 520 87, 800 161 S 1180 -87, 1400 -129" stroke="#5fd3a0" stroke-width="2.2" fill="none"/><path class="b" d="M-100 470 C 380 590, 520 99, 800 170 S 1180 -72, 1400 -115" stroke="#4aa8e8" stroke-width="1.0" fill="none"/><path class="b" d="M-100 479 C 380 599, 520 111, 800 179 S 1180 -57, 1400 -101" stroke="#c6f23d" stroke-width="1.6" fill="none"/><path class="b" d="M-100 488 C 380 608, 520 123, 800 188 S 1180 -42, 1400 -87" stroke="#9be22a" stroke-width="2.2" fill="none"/><path class="b" d="M-100 497 C 380 617, 520 135, 800 197 S 1180 -27, 1400 -73" stroke="#5fd3a0" stroke-width="1.0" fill="none"/><path class="b" d="M-100 506 C 380 626, 520 147, 800 206 S 1180 -12, 1400 -59" stroke="#4aa8e8" stroke-width="1.6" fill="none"/><path class="b" d="M-100 515 C 380 635, 520 159, 800 215 S 1180 3, 1400 -45" stroke="#c6f23d" stroke-width="2.2" fill="none"/><path class="b" d="M-100 524 C 380 644, 520 171, 800 224 S 1180 18, 1400 -31" stroke="#9be22a" stroke-width="1.0" fill="none"/><path class="b" d="M-100 533 C 380 653, 520 183, 800 233 S 1180 33, 1400 -17" stroke="#5fd3a0" stroke-width="1.6" fill="none"/><path class="b" d="M-100 542 C 380 662, 520 195, 800 242 S 1180 48, 1400 -3" stroke="#4aa8e8" stroke-width="2.2" fill="none"/><path class="b" d="M-100 551 C 380 671, 520 207, 800 251 S 1180 63, 1400 11" stroke="#c6f23d" stroke-width="1.0" fill="none"/><path class="b" d="M-100 560 C 380 680, 520 219, 800 260 S 1180 78, 1400 25" stroke="#9be22a" stroke-width="1.6" fill="none"/><path class="b" d="M-100 569 C 380 689, 520 231, 800 269 S 1180 93, 1400 39" stroke="#5fd3a0" stroke-width="2.2" fill="none"/><path class="b" d="M-100 578 C 380 698, 520 243, 800 278 S 1180 108, 1400 53" stroke="#4aa8e8" stroke-width="1.0" fill="none"/><path class="b" d="M-100 587 C 380 707, 520 255, 800 287 S 1180 123, 1400 67" stroke="#c6f23d" stroke-width="1.6" fill="none"/><path class="b" d="M-100 596 C 380 716, 520 267, 800 296 S 1180 138, 1400 81" stroke="#9be22a" stroke-width="2.2" fill="none"/><path class="b" d="M-100 605 C 380 725, 520 279, 800 305 S 1180 153, 1400 95" stroke="#5fd3a0" stroke-width="1.0" fill="none"/><path class="b" d="M-100 614 C 380 734, 520 291, 800 314 S 1180 168, 1400 109" stroke="#4aa8e8" stroke-width="1.6" fill="none"/><path class="b" d="M-100 623 C 380 743, 520 303, 800 323 S 1180 183, 1400 123" stroke="#c6f23d" stroke-width="2.2" fill="none"/><path class="b" d="M-100 632 C 380 752, 520 315, 800 332 S 1180 198, 1400 137" stroke="#9be22a" stroke-width="1.0" fill="none"/><path class="b" d="M-100 641 C 380 761, 520 327, 800 341 S 1180 213, 1400 151" stroke="#5fd3a0" stroke-width="1.6" fill="none"/><path class="b" d="M-100 650 C 380 770, 520 339, 800 350 S 1180 228, 1400 165" stroke="#4aa8e8" stroke-width="2.2" fill="none"/><path class="b" d="M-100 659 C 380 779, 520 351, 800 359 S 1180 243, 1400 179" stroke="#c6f23d" stroke-width="1.0" fill="none"/><path class="b" d="M-100 668 C 380 788, 520 363, 800 368 S 1180 258, 1400 193" stroke="#9be22a" stroke-width="1.6" fill="none"/><path class="f" d="M-100 443 C 380 563, 520 63, 800 143 S 1180 -117, 1400 -157" stroke="#c6f23d" stroke-width="1.0" stroke-opacity="0.70" fill="none"/><path class="f" d="M-100 452 C 380 572, 520 75, 800 152 S 1180 -102, 1400 -143" stroke="#9be22a" stroke-width="1.6" stroke-opacity="0.73" fill="none"/><path class="f" d="M-100 461 C 380 581, 520 87, 800 161 S 1180 -87, 1400 -129" stroke="#5fd3a0" stroke-width="2.2" stroke-opacity="0.76" fill="none"/><path class="f" d="M-100 470 C 380 590, 520 99, 800 170 S 1180 -72, 1400 -115" stroke="#4aa8e8" stroke-width="1.0" stroke-opacity="0.79" fill="none"/><path class="f" d="M-100 479 C 380 599, 520 111, 800 179 S 1180 -57, 1400 -101" stroke="#c6f23d" stroke-width="1.6" stroke-opacity="0.82" fill="none"/><path class="f" d="M-100 488 C 380 608, 520 123, 800 188 S 1180 -42, 1400 -87" stroke="#9be22a" stroke-width="2.2" stroke-opacity="0.70" fill="none"/><path class="f" d="M-100 497 C 380 617, 520 135, 800 197 S 1180 -27, 1400 -73" stroke="#5fd3a0" stroke-width="1.0" stroke-opacity="0.73" fill="none"/><path class="f" d="M-100 506 C 380 626, 520 147, 800 206 S 1180 -12, 1400 -59" stroke="#4aa8e8" stroke-width="1.6" stroke-opacity="0.76" fill="none"/><path class="f" d="M-100 515 C 380 635, 520 159, 800 215 S 1180 3, 1400 -45" stroke="#c6f23d" stroke-width="2.2" stroke-opacity="0.79" fill="none"/><path class="f" d="M-100 524 C 380 644, 520 171, 800 224 S 1180 18, 1400 -31" stroke="#9be22a" stroke-width="1.0" stroke-opacity="0.82" fill="none"/><path class="f" d="M-100 533 C 380 653, 520 183, 800 233 S 1180 33, 1400 -17" stroke="#5fd3a0" stroke-width="1.6" stroke-opacity="0.70" fill="none"/><path class="f" d="M-100 542 C 380 662, 520 195, 800 242 S 1180 48, 1400 -3" stroke="#4aa8e8" stroke-width="2.2" stroke-opacity="0.73" fill="none"/><path class="f" d="M-100 551 C 380 671, 520 207, 800 251 S 1180 63, 1400 11" stroke="#c6f23d" stroke-width="1.0" stroke-opacity="0.76" fill="none"/><path class="f" d="M-100 560 C 380 680, 520 219, 800 260 S 1180 78, 1400 25" stroke="#9be22a" stroke-width="1.6" stroke-opacity="0.79" fill="none"/><path class="f" d="M-100 569 C 380 689, 520 231, 800 269 S 1180 93, 1400 39" stroke="#5fd3a0" stroke-width="2.2" stroke-opacity="0.82" fill="none"/><path class="f" d="M-100 578 C 380 698, 520 243, 800 278 S 1180 108, 1400 53" stroke="#4aa8e8" stroke-width="1.0" stroke-opacity="0.70" fill="none"/><path class="f" d="M-100 587 C 380 707, 520 255, 800 287 S 1180 123, 1400 67" stroke="#c6f23d" stroke-width="1.6" stroke-opacity="0.73" fill="none"/><path class="f" d="M-100 596 C 380 716, 520 267, 800 296 S 1180 138, 1400 81" stroke="#9be22a" stroke-width="2.2" stroke-opacity="0.76" fill="none"/><path class="f" d="M-100 605 C 380 725, 520 279, 800 305 S 1180 153, 1400 95" stroke="#5fd3a0" stroke-width="1.0" stroke-opacity="0.79" fill="none"/><path class="f" d="M-100 614 C 380 734, 520 291, 800 314 S 1180 168, 1400 109" stroke="#4aa8e8" stroke-width="1.6" stroke-opacity="0.82" fill="none"/><path class="f" d="M-100 623 C 380 743, 520 303, 800 323 S 1180 183, 1400 123" stroke="#c6f23d" stroke-width="2.2" stroke-opacity="0.70" fill="none"/><path class="f" d="M-100 632 C 380 752, 520 315, 800 332 S 1180 198, 1400 137" stroke="#9be22a" stroke-width="1.0" stroke-opacity="0.73" fill="none"/><path class="f" d="M-100 641 C 380 761, 520 327, 800 341 S 1180 213, 1400 151" stroke="#5fd3a0" stroke-width="1.6" stroke-opacity="0.76" fill="none"/><path class="f" d="M-100 650 C 380 770, 520 339, 800 350 S 1180 228, 1400 165" stroke="#4aa8e8" stroke-width="2.2" stroke-opacity="0.79" fill="none"/><path class="f" d="M-100 659 C 380 779, 520 351, 800 359 S 1180 243, 1400 179" stroke="#c6f23d" stroke-width="1.0" stroke-opacity="0.82" fill="none"/><path class="f" d="M-100 668 C 380 788, 520 363, 800 368 S 1180 258, 1400 193" stroke="#9be22a" stroke-width="1.6" stroke-opacity="0.70" fill="none"/></svg><div><span class="pill" data-i="badge"></span><h1 data-i="h1" data-h></h1><p class="sub" data-i="sub"></p><div class="cta"><a class="btn" onclick="openO()" data-i="order"></a><a class="btn o" href="#svc" data-i="c2"></a></div><div class="tr"><span data-i="t1"></span><span data-i="t2"></span><span data-i="t3"></span></div></div>
+<div class="vis"><div class="vh"><span>order.flow</span><em>● running</em></div>
+<div class="flow"><svg viewBox="0 0 400 230"><path id="p1" d="M116 41 C 130 41,128 115,142 115"/><path id="p2" d="M258 115 C 272 115,270 189,284 189"/><circle r="3.5" fill="#c6f23d"><animateMotion dur="1.8s" repeatCount="indefinite"><mpath href="#p1"/></animateMotion></circle><circle r="3.5" fill="#c6f23d"><animateMotion dur="1.8s" begin=".9s" repeatCount="indefinite"><mpath href="#p2"/></animateMotion></circle></svg>
+<div class="nd n1"><small>01</small><span data-i="a1"></span></div><div class="nd n2"><small>02</small><span data-i="a3"></span></div><div class="nd n3"><small>03</small><span data-i="a4"></span></div></div>
+<div class="bars"><i style="height:30%"></i><i style="height:42%;animation-delay:.1s"></i><i style="height:55%;animation-delay:.2s"></i><i style="height:68%;animation-delay:.3s"></i><i style="height:82%;animation-delay:.4s"></i><i style="height:100%;animation-delay:.5s"></i></div><div class="row"><span>followers</span><b>▲</b></div></div></header>
+<div class="mq"><div class="mt" id="mt"></div></div>
+<section id="svc"><div class="hd"><h2 data-i="s1"></h2><p data-i="s2"></p></div><div class="g" id="pcs"></div><div style="text-align:center;margin-top:26px"><a class="btn d" onclick="openO()" data-i="all"></a></div></section>
+<section id="calc" class="alt"><div class="hd"><h2 data-i="k1"></h2><p data-i="k2"></p></div><div id="cb" style="max-width:900px;margin:0 auto"></div></section>
+<section><div class="hd"><h2 data-i="w1"></h2><p data-i="w2"></p></div><div class="g" id="acs"></div></section>
+<section class="pay" id="pay"><div class="hd"><h2 data-i="p1"></h2><p data-i="p2"></p></div><div class="g" id="pms"></div></section>
+<section id="how"><div class="hd"><h2 data-i="h2"></h2></div><div class="g st"><div class="card"><h4 data-i="a1"></h4><p data-i="a1p"></p></div><div class="card"><h4 data-i="a2"></h4><p data-i="a2p"></p></div><div class="card"><h4 data-i="a3"></h4><p data-i="a3p"></p></div><div class="card"><h4 data-i="a4"></h4><p data-i="a4p"></p></div></div></section>
+<section class="alt"><div class="hd"><h2 data-i="y1"></h2></div><div class="g"><div class="card"><h4 data-i="b1"></h4><p data-i="b1p"></p></div><div class="card"><h4 data-i="b2"></h4><p data-i="b2p"></p></div><div class="card"><h4 data-i="b3"></h4><p data-i="b3p"></p></div><div class="card"><h4 data-i="b4"></h4><p data-i="b4p"></p></div></div></section>
+<section id="faq"><div class="hd"><h2 data-i="f1"></h2></div><div class="faq"><div class="card"><h4 data-i="q1"></h4><p data-i="r1"></p></div><div class="card"><h4 data-i="q2"></h4><p data-i="r2"></p></div><div class="card"><h4 data-i="q3"></h4><p data-i="r3"></p></div><div class="card"><h4 data-i="q4"></h4><p data-i="r4"></p></div></div></section>
+<section class="band"><div class="hd" style="margin:0 auto"><h2 data-i="z1"></h2><p data-i="z2"></p><a class="btn" onclick="openO()" data-i="order"></a></div></section>
+<footer><span>© 2026 Navix Media — <span data-i="ft"></span></span><span><a data-mail style="text-decoration:underline">Gmail</a></span></footer>
+<a class="ic w waic fw" data-wa title="WhatsApp"></a>
+<div class="md" id="md"><div class="box"><button class="x" onclick="closeO()">✕</button><h3 data-i="oh"></h3><div id="ob"></div></div></div>
 <script>
-/* ================= Config ================= */
-const SYSTEM = `You are OUARRACH AI, a smart, friendly and highly capable assistant. You answer ANY question: study, programming, math, science, writing, daily life, business, ideas, translation, and more.
-- Reply in the same language the user writes in (Moroccan Darija, Arabic, French, English...). If the user writes Darija in Latin letters, reply in Darija in Latin letters.
-- Give complete, well-structured, in-depth answers by default (like a top expert tutor). Do not be brief or cut your answer short unless the user asks for a short one. Use headings, lists, examples and code blocks when they help.
-- Be accurate and clear. Explain step by step when it helps. For exercises (TD/exams) give a full worked solution. For code, give correct, runnable code in code blocks and explain briefly.
-- If a file is attached, base your answer on its real content. If you are not sure about something, say so instead of inventing.
-- Give complete, thorough, high-quality answers like a top-tier assistant: go in depth, use markdown (headings, lists, tables, code blocks), give examples, and do not cut answers short unless the user asks for brevity.
-- This app has built-in tools. Under every answer there are buttons to download it as PDF or Word. There is an image button (🖼) in the input bar, and typing "/img <description>" generates an image. If the user asks for a PDF, a Word file or an image, never say you cannot: write the full content of the document right away and tell them to click the PDF/Word button under your answer, or for images tell them to click 🖼 or type /img followed by a detailed description (and you may propose a good English prompt for it).`;
+const CFG={wa:"212603958178",mail:"navixmedia42@gmail.com",holder:"AYOUB OUARRACH",rib:"230 170 4944244211018800 50"};
+const WAI='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.32A7.85 7.85 0 0 0 12.05 4c-4.34 0-7.87 3.53-7.87 7.87 0 1.39.37 2.74 1.06 3.93L4 20l4.31-1.13a7.86 7.86 0 0 0 3.74.95h.01c4.34 0 7.87-3.53 7.87-7.87 0-2.1-.82-4.07-2.33-5.63zm-5.55 12.1h-.01a6.53 6.53 0 0 1-3.33-.91l-.24-.14-2.48.65.66-2.42-.16-.25a6.52 6.52 0 0 1-1-3.48c0-3.61 2.94-6.55 6.56-6.55a6.5 6.5 0 0 1 4.63 1.92 6.5 6.5 0 0 1 1.92 4.64c0 3.61-2.94 6.54-6.55 6.54zm3.59-4.9c-.2-.1-1.17-.58-1.35-.64-.18-.07-.31-.1-.44.1-.13.2-.5.64-.62.77-.11.13-.23.14-.42.05-.2-.1-.84-.31-1.6-.99-.59-.53-.99-1.18-1.1-1.38-.12-.2-.01-.31.1-.41.1-.1.22-.25.33-.38.11-.13.15-.22.22-.36.07-.15.04-.27-.02-.38-.07-.1-.61-1.47-.84-2.01-.22-.53-.45-.46-.62-.46-.16-.01-.34-.01-.53-.01-.18 0-.47.07-.72.34-.25.27-.96.94-.96 2.28 0 1.34.98 2.64 1.12 2.83.13.18 1.85 2.83 4.49 3.86 2.64 1.03 2.64.69 3.12.65.47-.04 1.53-.62 1.74-1.23.22-.6.22-1.11.16-1.22-.07-.11-.25-.18-.45-.28z"/></svg>';
+const wa=x=>"https://wa.me/"+CFG.wa+(x?"?text="+encodeURIComponent(x):"");
+const T=(a,b,c)=>[a,b,c];
+const D={n1:T("الخدمات","Services","Services"),n2:T("طرق الدفع","Payment","Paiement"),n3:T("كيف يعمل","How it works","Comment ça marche"),n4:T("الأسئلة","FAQ","FAQ"),order:T("اطلب الآن","Order now","Commander"),
+badge:T("وكالة تسويق رقمي — المغرب","Digital marketing agency — Morocco","Agence de marketing digital — Maroc"),
+h1:T("نمِّ حساباتك على السوشيال ميديا <b>بأسعار مغربية</b>","Grow your social accounts at <b>Moroccan prices</b>","Développez vos comptes à <b>prix marocains</b>"),
+sub:T("متابعون وإعجابات ومشاهدات لجميع المنصات، مع مواقع وتصميم وإعلانات. اطلب مباشرة بدون إنشاء حساب.","Followers, likes and views on every platform, plus websites, design and ads. Order directly, no account needed.","Abonnés, likes et vues sur toutes les plateformes, plus sites, design et pubs. Commandez sans compte."),
+c2:T("تصفح الخدمات","Browse services","Voir les services"),t1:T("بدون حساب","No account","Sans compte"),t2:T("CIH · CashPlus · Wafacash","CIH · CashPlus · Wafacash","CIH · CashPlus · Wafacash"),t3:T("دعم مباشر عبر واتساب","Direct WhatsApp support","Support direct WhatsApp"),
+s1:T("خدمات تنمية الحسابات","Social growth services","Services de croissance"),s2:T("اختر المنصة واطلب مباشرة. الأسعار بالدرهم لكل 1000.","Pick a platform and order. Prices in MAD per 1000.","Choisissez la plateforme. Prix en MAD pour 1000."),from:T("ابتداءً من","From","À partir de"),per:T("درهم / 1000","MAD / 1000","MAD / 1000"),all:T("كل المنصات والخدمات","All platforms & services","Toutes les plateformes"),
+w1:T("مواقع وتصميم وإعلانات","Websites, design & ads","Sites, design & pubs"),w2:T("خدمات الوكالة بسعر واضح للمشروع.","Agency services at a clear project price.","Services d'agence à prix clair."),unit:T("درهم","MAD","MAD"),
+p1:T("ادفع بالطريقة التي تناسبك","Pay the way that suits you","Payez comme vous voulez"),p2:T("بعد تأكيد طلبك ادفع بالدرهم المغربي بإحدى هذه الطرق.","After confirming your order, pay in MAD with one of these methods.","Après confirmation, payez en MAD avec l'un de ces modes."),
+hold:T("اسم صاحب الحساب","Account holder","Titulaire"),rib:T("رقم الحساب (RIB)","RIB","RIB"),copy:T("نسخ","Copy","Copier"),ask:T("اطلب التفاصيل عبر واتساب","Ask details on WhatsApp","Demander sur WhatsApp"),
+h2:T("كيف يعمل","How it works","Comment ça marche"),a1:T("اختر الخدمة","Choose a service","Choisissez"),a1p:T("حدد المنصة والكمية وأدخل الرابط.","Pick platform, quantity and your link.","Plateforme, quantité et lien."),a2:T("أرسل طلبك","Send your order","Envoyez"),a2p:T("اسمك ورقم واتساب فقط، بدون حساب.","Just your name and WhatsApp. No account.","Nom et WhatsApp, sans compte."),a3:T("ادفع","Pay","Payez"),a3p:T("CIH أو CashPlus أو Wafacash ثم أرسل الإيصال.","CIH, CashPlus or Wafacash, then send the receipt.","CIH, CashPlus ou Wafacash puis le reçu."),a4:T("نبدأ التنفيذ","We start","On démarre"),a4p:T("نؤكد لك على واتساب ونتابع الطلب.","We confirm on WhatsApp and follow up.","Confirmation et suivi sur WhatsApp."),
+y1:T("لماذا Navix Media","Why Navix Media","Pourquoi Navix Media"),b1:T("بدون إنشاء حساب","No account needed","Sans compte"),b1p:T("اطلب في دقيقة واحدة بالاسم ورقم واتساب.","Order in a minute with your name and WhatsApp.","Commandez en une minute."),b2:T("أسعار بالدرهم","Prices in MAD","Prix en MAD"),b2p:T("أسعار واضحة تناسب السوق المغربي.","Clear prices for the Moroccan market.","Prix clairs pour le marché marocain."),b3:T("دعم مباشر","Direct support","Support direct"),b3p:T("تواصل معنا على واتساب أو البريد.","Reach us on WhatsApp or email.","Contactez-nous sur WhatsApp ou e-mail."),b4:T("خدمات متكاملة","All-in-one","Tout-en-un"),b4p:T("تنمية حسابات ومواقع وتصميم ومونتاج وإعلانات.","Growth, websites, design, video and ads.","Croissance, sites, design, vidéo et pubs."),
+f1:T("أسئلة شائعة","FAQ","Questions fréquentes"),q1:T("هل أحتاج إلى حساب؟","Do I need an account?","Faut-il un compte ?"),r1:T("لا. أرسل طلبك بالاسم ورقم واتساب فقط.","No. Just send your order with your name and WhatsApp.","Non. Nom et WhatsApp suffisent."),q2:T("كيف أدفع؟","How do I pay?","Comment payer ?"),r2:T("عبر تحويل CIH أو CashPlus أو Wafacash، ثم أرسل صورة الإيصال على واتساب.","By CIH transfer, CashPlus or Wafacash, then send the receipt on WhatsApp.","Par CIH, CashPlus ou Wafacash, puis envoyez le reçu."),q3:T("متى يبدأ التنفيذ؟","When does it start?","Quand ça démarre ?"),r3:T("بعد تأكيد الدفع. أما المواقع فتستغرق من 3 إلى 15 يومًا.","After payment is confirmed. Websites take 3 to 15 days.","Après paiement. Sites : 3 à 15 jours."),q4:T("هل حسابي بأمان؟","Is my account safe?","Mon compte est-il en sécurité ?"),r4:T("نلتزم بمعايير المنصات. تأكد أن حسابك عام وليس خاصًا.","We follow platform standards. Make sure your account is public.","Nous respectons les standards. Compte public requis."),
+z1:T("جاهز لتنمية حساباتك؟","Ready to grow?","Prêt à grandir ?"),z2:T("اطلب الآن وسنتواصل معك على واتساب.","Order now and we will contact you on WhatsApp.","Commandez, nous vous contacterons sur WhatsApp."),ft:T("جميع الحقوق محفوظة","All rights reserved","Tous droits réservés"),
+oh:T("طلب جديد","New order","Nouvelle commande"),op:T("المنصة","Platform","Plateforme"),os:T("الخدمة","Service","Service"),ol:T("الرابط","Link","Lien"),od:T("تفاصيل المشروع / الرابط","Project details / link","Détails / lien"),oq:T("الكمية","Quantity","Quantité"),on:T("الاسم","Name","Nom"),ow:T("رقم واتساب","WhatsApp number","Numéro WhatsApp"),oe:T("البريد (اختياري)","Email (optional)","E-mail (facultatif)"),ot:T("الإجمالي","Total","Total"),osub:T("تأكيد الطلب","Confirm order","Valider"),pick:T("— اختر —","— choose —","— choisir —"),web:T("مواقع وتصميم","Web & design","Web & design"),
+e1:T("أدخل رابطًا يبدأ بـ https://","Enter a link starting with https://","Entrez un lien https://"),e2:T("املأ الاسم ورقم واتساب","Fill your name and WhatsApp","Remplissez nom et WhatsApp"),e3:T("الكمية يجب أن تكون بين","Quantity must be between","Quantité entre"),e4:T("اكتب تفاصيل الطلب","Write the order details","Détaillez la commande"),
+ok:T("تم استلام طلبك ✅ الحالة: قيد المعالجة","Order received ✅ Status: processing","Commande reçue ✅ Statut : en cours"),okp:T("ادفع الآن ثم أرسل الإيصال وأكّد الطلب على واتساب.","Pay now, then send the receipt and confirm on WhatsApp.","Payez, puis envoyez le reçu et confirmez sur WhatsApp."),okwa:T("تأكيد عبر واتساب","Confirm on WhatsApp","Confirmer sur WhatsApp"),
+cf:T("متابعون","Followers","Abonnés"),cl:T("إعجابات","Likes","J'aime"),cv:T("مشاهدات","Views","Vues"),hq:T("جودة عالية","High quality","Haute qualité"),pr:T("بريميوم","Premium","Premium"),
+lp:T("صفحة هبوط","Landing page","Page de destination"),ec:T("متجر إلكتروني","E-commerce store","Boutique en ligne"),lg:T("تصميم شعار","Logo design","Création de logo"),vd:T("مونتاج فيديو","Video editing","Montage vidéo"),se:T("سيو (شهر)","SEO (month)","SEO (mois)"),ad:T("إدارة إعلانات (شهر)","Ads management (month)","Gestion pub (mois)"),po:T("موقع بورتفوليو","Portfolio site","Site portfolio"),re:T("موقع عقارات","Real estate site","Site immobilier"),vo:T("تعليق صوتي (100 كلمة)","Voice comment (100 words)","Commentaire vocal (100 mots)")};
+let L=0;const LG=["ar","en","fr"];try{L=Math.max(0,LG.indexOf(localStorage.getItem("nx_l")))}catch(e){}
+const t=k=>D[k][L],$=s=>document.querySelector(s),cap=p=>p=="x"?"X":p[0].toUpperCase()+p.slice(1);
+const PL={instagram:["📸","#e1306c","flv",[40,12,3]],tiktok:["🎵","#ff0050","flv",[30,8,1.5]],youtube:["▶️","#ff0000","flv",[150,30,25]],facebook:["f","#1877f2","flv",[35,12,5]],x:["𝕏","#26252b","flv",[60,15,5]],snapchat:["👻","#d9a900","fv",[50,4]],telegram:["✈️","#229ed9","fv",[25,3]],kick:["⚡","#2fd600","f",[60]],twitch:["🎮","#9146ff","fv",[70,10]],spotify:["🎧","#1db954","fl",[80,30]],soundcloud:["☁️","#ff5500","fl",[50,20]],linkedin:["in","#0a66c2","f",[100]],pinterest:["📌","#e60023","f",[50]],reddit:["👽","#ff4500","f",[80]],discord:["💬","#5865f2","f",[100]],threads:["🧵","#26252b","f",[50]],whatsapp:["💚","#25d366","f",[120]]};
+const AG=[["lp",800],["ec",3000],["lg",250],["vd",100],["se",800],["ad",1000],["po",1500],["re",2000],["vo",30]],SV=[];
+for(const[k,v]of Object.entries(PL))[...v[2]].forEach((c,i)=>{SV.push({id:k+c,p:k,c,n:"hq",price:v[3][i],min:100,max:100000,u:0});if(c=="f")SV.push({id:k+c+"p",p:k,c,n:"pr",price:+(v[3][i]*1.7).toFixed(2),min:100,max:50000,u:0})});
+AG.forEach(([k,pr])=>SV.push({id:"a"+k,p:"web",c:"a",n:k,price:pr,min:1,max:k=="vo"?20:10,u:1}));
+const nm=s=>s.p=="web"?t(s.n):`${cap(s.p)} ${t("c"+s.c)} — ${t(s.n)}`,cost=(s,q)=>s.u?q*s.price:q/1000*s.price,mon=n=>n.toFixed(n%1?2:0)+" DH";
+const HIGH=["instagram","tiktok","youtube","facebook","x","telegram","snapchat","twitch"];
+function paint(){document.documentElement.lang=LG[L];document.documentElement.dir=L?"ltr":"rtl";
+document.querySelectorAll("[data-i]").forEach(e=>{const v=D[e.dataset.i];if(v)e.hasAttribute("data-h")?e.innerHTML=v[L]:e.textContent=v[L]});
+document.querySelectorAll(".lang button").forEach(b=>b.classList.toggle("on",+b.dataset.l==L));
+$("#pcs").innerHTML=HIGH.map(k=>{const v=PL[k];return`<div class="card pc"><div class="i" style="background:${v[1]}">${v[0]}</div><h3>${cap(k)}</h3><div class="p">${t("from")}<b>${Math.min(...v[3])} ${t("per")}</b></div><a class="btn d" onclick="openO('${k}')">${t("order")}</a></div>`}).join("");
+$("#acs").innerHTML=AG.map(([k,p])=>`<div class="card pc"><h3>${t(k)}</h3><div class="p">${t("from")}<b>${p} ${t("unit")}</b></div><a class="btn d" onclick="openO('web','a${k}')">${t("order")}</a></div>`).join("");
+const nmr=`<div class="f">${t("hold")}</div><div class="v">${CFG.holder}</div>`;
+$("#pms").innerHTML=`<div class="card"><h3>CIH Bank</h3>${nmr}<div class="f">${t("rib")}</div><div class="v">${CFG.rib}</div><a class="btn" onclick="cp('${CFG.rib}',this)">${t("copy")}</a></div><div class="card"><h3>CashPlus</h3>${nmr}<a class="btn" href="${wa("CashPlus")}" target="_blank">${t("ask")}</a></div><div class="card"><h3>Wafacash</h3>${nmr}<a class="btn" href="${wa("Wafacash")}" target="_blank">${t("ask")}</a></div>`;
+document.querySelectorAll("[data-wa]").forEach(a=>{a.href=wa();a.target="_blank";if(!a.innerHTML)a.innerHTML=WAI});document.querySelectorAll("[data-mail]").forEach(a=>a.href="mailto:"+CFG.mail);
+calc();mqf();rv();if($("#md").classList.contains("on"))form(true)}
+function cp(x,b){try{navigator.clipboard.writeText(x);b.textContent="✓"}catch(e){}}
+let cur={p:"instagram",s:"",done:null};
+function openO(p,s,q){cur={p:p||"instagram",s:s||"",q:q||"",done:null};$("#md").classList.add("on");form()}
+function closeO(){$("#md").classList.remove("on")}
+function opts(p){return SV.filter(s=>s.p==p).map(s=>`<option value="${s.id}" ${cur.s==s.id?"selected":""}>${nm(s)} — ${mon(s.price)}${s.u?"":" /1000"}</option>`).join("")}
+function form(keep){const el=$("#ob");$("#md h3").textContent=t("oh");
+if(cur.done){el.innerHTML=cur.done;return}
+const v=keep&&$("#on")?{n:$("#on").value,w:$("#ow").value,e:$("#oe").value,l:$("#ol")?$("#ol").value:"",q:$("#oq").value}:{n:"",w:"",e:"",l:"",q:cur.q||""};
+const s=SV.find(x=>x.id==cur.s),web=cur.p=="web";
+el.innerHTML=`<div id="oerr"></div><label>${t("op")}</label><select id="opl" onchange="cur.p=this.value;cur.s='';form(true)">${Object.keys(PL).map(k=>`<option value="${k}" ${cur.p==k?"selected":""}>${cap(k)}</option>`).join("")}<option value="web" ${web?"selected":""}>${t("web")}</option></select>
+<label>${t("os")}</label><select id="osv" onchange="cur.s=this.value;form(true)"><option value="">${t("pick")}</option>${opts(cur.p)}</select>
+<label>${web?t("od"):t("ol")}</label>${web?`<textarea id="ol" rows="3">${v.l}</textarea>`:`<input id="ol" dir="ltr" placeholder="https://..." value="${v.l}">`}
+<label>${t("oq")}${s?` (${s.min} – ${s.max})`:""}</label><input id="oq" type="number" min="1" value="${v.q||(s?s.min:"")}" oninput="tt()">
+<div class="tot"><span>${t("ot")}</span><b id="ott">${s?mon(cost(s,+(v.q||s.min))):mon(0)}</b></div>
+<label>${t("on")}</label><input id="on" value="${v.n}"><label>${t("ow")}</label><input id="ow" dir="ltr" placeholder="+212 6..." value="${v.w}"><label>${t("oe")}</label><input id="oe" dir="ltr" value="${v.e}">
+<button class="btn" style="width:100%;margin-top:16px" onclick="sub()">${t("osub")}</button>`}
+function tt(){const s=SV.find(x=>x.id==cur.s);if(s)$("#ott").textContent=mon(cost(s,+$("#oq").value||0))}
+function err(k,x){$("#oerr").innerHTML=`<div class="er">${t(k)}${x||""}</div>`}
+async function sub(){const s=SV.find(x=>x.id==$("#osv").value);if(!s)return err("os");cur.s=s.id;const q=+$("#oq").value,l=$("#ol").value.trim(),n=$("#on").value.trim(),w=$("#ow").value.trim(),e=$("#oe").value.trim(),web=s.p=="web";
+if(!web&&!/^https?:\/\/.+/i.test(l))return err("e1");if(web&&!l)return err("e4");if(!q||q<s.min||q>s.max)return err("e3",` ${s.min} – ${s.max}`);if(!n||w.replace(/\D/g,"").length<8)return err("e2");
+const id=Math.floor(Math.random()*9e5+1e5),tot=cost(s,q),pm={method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(Object.assign({_subject:"Navix: new order #"+id,_template:"table",_captcha:"false",order:"#"+id,service:nm(s),quantity:q,total:mon(tot),link_or_details:l,customer:n,whatsapp:w,status:"NEW ORDER - PROCESSING"},e?{email:e}:{}))};
+fetch("https://formsubmit.co/ajax/"+CFG.mail,pm).catch(()=>{});
+const msg=`#${id} | ${nm(s)} | ${q} | ${mon(tot)} | ${l} | ${n} | ${w}`;
+cur.done=`<div class="ok">${t("ok")} #${id}<br>${t("okp")}</div><div class="card" style="margin-bottom:14px"><b>CIH</b> — ${CFG.holder}<br><span dir="ltr" style="font-weight:800">${CFG.rib}</span><br><small>CashPlus · Wafacash: ${CFG.holder}</small></div><a class="btn" style="width:100%;text-align:center" href="${wa(msg)}" target="_blank">${t("okwa")}</a>`;form()}
 
-const LS_KEY = 'ouarrach_chats_v2', LS_MODEL = 'ouarrach_model_v3', MAX_FILE_CHARS = 60000;
-let chats = [], currentId = null, busy = false, stopFlag = false, attached = null;
-
-/* ================= Helpers ================= */
-const $ = (s) => document.querySelector(s);
-const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
-function esc(s) { return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
-function load() { try { chats = JSON.parse(localStorage.getItem(LS_KEY) || '[]'); } catch { chats = []; } }
-function save() { try { localStorage.setItem(LS_KEY, JSON.stringify(chats, (k, v) => k === 'img' ? undefined : v)); } catch (e) { /* storage full: ignore */ } }
-function cur() { return chats.find(c => c.id === currentId); }
-function errMsg(e) { return e?.error?.message || e?.message || (typeof e === 'string' ? e : JSON.stringify(e)); }
-
-function diag(msg) {
-  const d = document.getElementById('diag');
-  d.classList.remove('hidden');
-  d.innerHTML += '<div>' + esc(msg) + '</div>';
-}
-window.addEventListener('error', (e) => diag('JS error: ' + e.message));
-window.addEventListener('unhandledrejection', (e) => diag('Error: ' + errMsg(e.reason)));
-
-try { if (window.pdfjsLib) pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js'; } catch {}
-try { if (window.marked) marked.setOptions({ breaks: true, gfm: true }); } catch {}
-
-function renderMd(text) {
-  try {
-    if (window.marked && window.DOMPurify) return DOMPurify.sanitize(marked.parse(text || ''));
-  } catch {}
-  return '<div style="white-space:pre-wrap">' + esc(text || '') + '</div>';
-}
-function enhance(el) {
-  el.querySelectorAll('pre').forEach(pre => {
-    if (pre.querySelector('.copy-btn')) return;
-    const code = pre.querySelector('code');
-    if (code) { try { hljs.highlightElement(code); } catch {} }
-    const btn = document.createElement('button');
-    btn.className = 'copy-btn'; btn.textContent = 'Copy';
-    btn.onclick = async () => {
-      try { await navigator.clipboard.writeText(code ? code.innerText : pre.innerText); btn.textContent = 'Copied ✓'; }
-      catch { btn.textContent = 'Error'; }
-      setTimeout(() => btn.textContent = 'Copy', 1500);
-    };
-    pre.appendChild(btn);
-  });
-}
-
-/* ================= Sidebar / chats ================= */
-function toggleSidebar(open) {
-  const sb = $('#sidebar'), bd = $('#backdrop');
-  const rtl = document.documentElement.dir === 'rtl';
-  sb.classList.toggle('-translate-x-full', !open && !rtl);
-  sb.classList.toggle('translate-x-full', !open && rtl);
-  bd.classList.toggle('hidden', !open);
-}
-function renderList() {
-  const box = $('#chatList');
-  box.innerHTML = '';
-  chats.slice().reverse().forEach(c => {
-    const row = document.createElement('div');
-    row.className = 'group flex items-center gap-2 rounded-xl px-3 py-2 text-sm cursor-pointer transition ' +
-      (c.id === currentId ? 'bg-slate-800 text-white' : 'text-slate-400 hover:bg-slate-800/60 hover:text-white');
-    const t = document.createElement('span');
-    t.className = 'flex-1 truncate'; t.dir = 'auto'; t.textContent = c.title || 'New chat';
-    const d = document.createElement('button');
-    d.className = 'opacity-0 group-hover:opacity-100 text-slate-500 hover:text-rose-400 transition';
-    d.innerHTML = '<i class="fas fa-trash-can text-xs"></i>';
-    d.onclick = (e) => { e.stopPropagation(); deleteChat(c.id); };
-    row.onclick = () => { if (busy) return; currentId = c.id; renderAll(); toggleSidebar(false); };
-    row.append(t, d);
-    box.appendChild(row);
-  });
-}
-function newChat() {
-  if (busy) return;
-  const c = { id: uid(), title: '', messages: [] };
-  chats.push(c); currentId = c.id; save(); renderAll(); toggleSidebar(false);
-  $('#input').focus();
-}
-function deleteChat(id) {
-  if (busy) return;
-  chats = chats.filter(c => c.id !== id);
-  if (currentId === id) currentId = chats.length ? chats[chats.length - 1].id : null;
-  save(); renderAll();
-}
-function clearAll() {
-  if (busy) return;
-  if (!confirm('Delete all chats?')) return;
-  chats = []; currentId = null; save(); renderAll();
-}
-
-/* ================= Rendering messages ================= */
-const SUGGESTIONS = [
-  ['fa-code', 'Chra7 liya récursivité f Python b mital'],
-  ['fa-square-root-variable', 'Ch7al hiya intégrale de x·sin(x) ? 7ellha khtwa b khtwa'],
-  ['fa-language', 'Traduis had l-jomla l français w l\'anglais: "Kanbghi nt3alem l-programmation"'],
-  ['fa-lightbulb', 'A3ṭini 5 afkar dyal projet informatique l fin d\'études'],
-];
-function welcomeHTML() {
-  return `<div class="text-center pt-10 pb-4">
-    <div class="w-14 h-14 mx-auto rounded-3xl brand-grad flex items-center justify-center text-white text-xl shadow-xl shadow-sky-500/20 mb-4"><i class="fas fa-brain"></i></div>
-    <h2 class="text-2xl font-extrabold text-white mb-1">Salam! Ana OUARRACH AI 👋</h2>
-    <p class="text-slate-400 text-sm mb-6" dir="auto">اسأل أي سؤال أو أرفق PDF / Cours / TD / كود وسأجيبك · Ask anything or attach a file</p>
-    <div class="grid sm:grid-cols-2 gap-3 text-start">
-      ${SUGGESTIONS.map((s, i) => `<button onclick="useSuggestion(${i})" class="p-4 rounded-2xl bg-slate-900/70 border border-slate-800 hover:border-sky-500/50 hover:bg-slate-800/70 transition text-sm text-slate-300 flex gap-3 items-start"><i class="fas ${s[0]} text-sky-400 mt-0.5"></i><span dir="auto">${esc(s[1])}</span></button>`).join('')}
-    </div>
-  </div>`;
-}
-function useSuggestion(i) { $('#input').value = SUGGESTIONS[i][1]; send(); }
-
-function userBubble(m) {
-  const wrap = document.createElement('div');
-  wrap.className = 'flex justify-end';
-  const b = document.createElement('div');
-  b.className = 'brand-grad text-white rounded-2xl rounded-ee-md px-4 py-3 max-w-[85%] text-sm shadow-lg whitespace-pre-wrap break-words';
-  b.dir = 'auto';
-  if (m.file) {
-    const chip = document.createElement('div');
-    chip.className = 'text-xs font-bold mb-1 opacity-90';
-    chip.innerHTML = '<i class="fas fa-paperclip me-1"></i>';
-    chip.appendChild(document.createTextNode(m.file));
-    b.appendChild(chip);
-  }
-  b.appendChild(document.createTextNode(m.shown || ''));
-  wrap.appendChild(b);
-  return wrap;
-}
-function aiBubble(m) {
-  const wrap = document.createElement('div');
-  wrap.className = 'flex gap-3 items-start';
-  wrap.innerHTML = '<div class="w-8 h-8 rounded-xl brand-grad flex items-center justify-center text-white text-xs font-bold shrink-0 shadow-md">AI</div>';
-  const col = document.createElement('div');
-  col.className = 'flex-1 min-w-0';
-  const b = document.createElement('div');
-  b.className = 'md text-slate-200';
-  b.dir = 'auto';
-  paintFinal(b, m);
-  col.appendChild(b);
-  if (m.content) col.appendChild(actionsBar(m));
-  wrap.appendChild(col);
-  return wrap;
-}
-function renderMessages() {
-  const box = $('#messages');
-  box.innerHTML = '';
-  const c = cur();
-  if (!c || c.messages.length === 0) { box.innerHTML = welcomeHTML(); return; }
-  c.messages.forEach(m => box.appendChild(m.role === 'user' ? userBubble(m) : aiBubble(m)));
-  scrollDown(true);
-}
-function renderAll() { renderList(); renderMessages(); }
-function scrollDown(force) {
-  const s = $('#scroller');
-  const near = s.scrollHeight - s.scrollTop - s.clientHeight < 160;
-  if (force || near) s.scrollTop = s.scrollHeight;
-}
-
-/* ================= Attachments ================= */
-async function readAttachment(file) {
-  const n = file.name.toLowerCase();
-  if (n.endsWith('.pdf')) {
-    if (!window.pdfjsLib) throw new Error('PDF reader failed to load (CDN blocked?). Try another network or paste the text.');
-    const pdf = await pdfjsLib.getDocument({ data: await file.arrayBuffer() }).promise;
-    let t = '';
-    for (let i = 1; i <= pdf.numPages; i++) {
-      const page = await pdf.getPage(i);
-      const tc = await page.getTextContent();
-      t += `\n--- Page ${i} ---\n` + tc.items.map(x => x.str).join(' ');
-      if (t.length > MAX_FILE_CHARS) break;
-    }
-    if (t.replace(/--- Page \d+ ---/g, '').trim().length < 30) throw new Error('This PDF has no selectable text (scanned?). Try a screenshot as an image instead.');
-    return { name: file.name, type: 'text', text: t.slice(0, MAX_FILE_CHARS) };
-  }
-  if (n.endsWith('.docx')) {
-    if (!window.mammoth) throw new Error('DOCX reader failed to load (CDN blocked?).');
-    const r = await mammoth.extractRawText({ arrayBuffer: await file.arrayBuffer() });
-    return { name: file.name, type: 'text', text: r.value.slice(0, MAX_FILE_CHARS) };
-  }
-  if (/\.(png|jpe?g|webp)$/.test(n)) {
-    const dataUrl = await new Promise((res, rej) => { const fr = new FileReader(); fr.onload = () => res(fr.result); fr.onerror = rej; fr.readAsDataURL(file); });
-    return { name: file.name, type: 'image', dataUrl };
-  }
-  return { name: file.name, type: 'text', text: (await file.text()).slice(0, MAX_FILE_CHARS) };
-}
-$('#fileInput').addEventListener('change', async (e) => {
-  const f = e.target.files[0];
-  if (!f) return;
-  try {
-    $('#fileName').textContent = 'Reading ' + f.name + '…';
-    $('#fileChip').classList.remove('hidden');
-    attached = await readAttachment(f);
-    $('#fileName').textContent = f.name;
-  } catch (err) {
-    attached = null; $('#fileChip').classList.add('hidden');
-    alert(errMsg(err));
-  }
-  e.target.value = '';
-});
-function removeFile() { attached = null; $('#fileChip').classList.add('hidden'); }
-
-/* ================= Direct Anthropic API (optional, needs your key) ================= */
-const LS_API = 'ouarrach_api_key_v1';
-function getApiKey() {
-  let k = '';
-  try { k = localStorage.getItem(LS_API) || ''; } catch {}
-  if (!k) {
-    k = (prompt('Paste your Anthropic API key (sk-ant-...). It is stored only in this browser:') || '').trim();
-    if (k) { try { localStorage.setItem(LS_API, k); } catch {} }
-  }
-  return k;
-}
-async function* anthropicStream(history, image) {
-  const key = getApiKey();
-  if (!key) throw new Error('No API key provided.');
-  const msgs = history.map(m => ({ role: m.role, content: m.content }));
-  while (msgs.length && msgs[0].role !== 'user') msgs.shift();
-  if (image && msgs.length) {
-    const mm = /^data:(.+?);base64,(.+)$/.exec(image);
-    if (mm) {
-      const last = msgs[msgs.length - 1];
-      last.content = [{ type: 'image', source: { type: 'base64', media_type: mm[1], data: mm[2] } }, { type: 'text', text: last.content }];
-    }
-  }
-  const r = await fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: {
-      'content-type': 'application/json',
-      'x-api-key': key,
-      'anthropic-version': '2023-06-01',
-      'anthropic-dangerous-direct-browser-access': 'true'
-    },
-    body: JSON.stringify({ model: 'claude-sonnet-5-5', max_tokens: 8192, system: SYSTEM, messages: msgs, stream: true })
-  });
-  if (!r.ok) {
-    const t = await r.text();
-    if (r.status === 401) { try { localStorage.removeItem(LS_API); } catch {} }
-    throw new Error('Anthropic API ' + r.status + ': ' + t.slice(0, 300));
-  }
-  const reader = r.body.getReader(), dec = new TextDecoder();
-  let buf = '';
-  try {
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-      buf += dec.decode(value, { stream: true });
-      const lines = buf.split('\n');
-      buf = lines.pop();
-      for (const ln of lines) {
-        if (!ln.startsWith('data:')) continue;
-        const d = ln.slice(5).trim();
-        if (!d || d === '[DONE]') continue;
-        try {
-          const j = JSON.parse(d);
-          if (j.type === 'content_block_delta' && j.delta && j.delta.text) yield { text: j.delta.text };
-        } catch {}
-      }
-    }
-  } finally { try { reader.cancel(); } catch {} }
-}
-
-/* ================= Image mode, message actions, exports ================= */
-let imgMode = false;
-function toggleImgMode() {
-  imgMode = !imgMode;
-  const b = $('#imgBtn');
-  b.classList.toggle('text-purple-400', imgMode);
-  b.classList.toggle('bg-slate-800', imgMode);
-  $('#input').placeholder = imgMode ? 'Describe the image you want… / صف الصورة…' : 'Ask anything… / اسأل أي سؤال… / Pose ta question…';
-  $('#input').focus();
-}
-
-function paintFinal(el, m) {
-  el.innerHTML = renderMd(m.content);
-  if (m.img) {
-    const box = document.createElement('div');
-    box.className = 'my-3';
-    const img = document.createElement('img');
-    img.src = m.img; img.alt = 'generated image';
-    img.className = 'rounded-2xl border border-slate-700 max-w-full sm:max-w-md';
-    const a = document.createElement('a');
-    a.href = m.img; a.download = 'ouarrach-image.png';
-    a.className = 'inline-block mt-2 text-xs text-sky-400 hover:underline';
-    a.textContent = '⬇ Download image';
-    box.append(img, document.createElement('br'), a);
-    el.appendChild(box);
-  }
-  enhance(el);
-}
-
-function actionsBar(m) {
-  const bar = document.createElement('div');
-  bar.className = 'actions flex gap-2 mt-2 text-[11px]';
-  const mk = (icon, label, fn) => {
-    const b = document.createElement('button');
-    b.className = 'px-2.5 py-1 rounded-lg border border-slate-700 text-slate-400 hover:text-white hover:bg-slate-800 transition';
-    b.innerHTML = '<i class="fas ' + icon + ' me-1"></i>' + label;
-    b.onclick = () => fn(b);
-    return b;
-  };
-  bar.append(
-    mk('fa-copy', 'Copy', async (b) => { try { await navigator.clipboard.writeText(m.content); b.lastChild.textContent = 'Copied ✓'; setTimeout(() => b.lastChild.textContent = 'Copy', 1500); } catch {} }),
-    mk('fa-file-pdf', 'PDF', () => exportDoc('pdf', m.content)),
-    mk('fa-file-word', 'Word', () => exportDoc('doc', m.content))
-  );
-  return bar;
-}
-
-function exportDoc(kind, md) {
-  const body = renderMd(md);
-  const html = '<!DOCTYPE html><html><head><meta charset="utf-8"><title>OUARRACH AI</title><style>' +
-    'body{font-family:Arial,Tahoma,sans-serif;line-height:1.7;padding:24px;color:#111}h1,h2,h3{color:#0b3d91}' +
-    'pre{background:#f3f4f6;padding:10px;border-radius:6px;white-space:pre-wrap;direction:ltr;text-align:left}' +
-    'code{background:#f3f4f6;padding:1px 4px}table{border-collapse:collapse}td,th{border:1px solid #999;padding:6px}' +
-    '</style></head><body dir="auto">' + body + '</body></html>';
-  if (kind === 'doc') {
-    const blob = new Blob(['﻿', html], { type: 'application/msword' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob); a.download = 'ouarrach-ai.doc';
-    document.body.appendChild(a); a.click(); a.remove();
-    setTimeout(() => URL.revokeObjectURL(a.href), 3000);
-  } else {
-    // "Save as PDF" in the print dialog: works perfectly with Arabic / RTL
-    const f = document.createElement('iframe');
-    f.style.cssText = 'position:fixed;right:0;bottom:0;width:0;height:0;border:0';
-    document.body.appendChild(f);
-    f.contentDocument.open(); f.contentDocument.write(html); f.contentDocument.close();
-    setTimeout(() => { f.contentWindow.focus(); f.contentWindow.print(); setTimeout(() => f.remove(), 3000); }, 400);
-  }
-}
-
-/* ================= Sending ================= */
-function onSendClick() { busy ? (stopFlag = true) : send(); }
-function setBusy(v) {
-  busy = v;
-  $('#sendIcon').className = v ? 'fas fa-stop' : 'fas fa-arrow-up';
-}
-
-async function send() {
-  if (busy) return;
-  const input = $('#input');
-  const text = input.value.trim();
-  if (!text && !attached) return;
-  const useKey = $('#modelSelect').value === '__key__';
-  if (!useKey && typeof puter === 'undefined') {
-    diag('Puter engine did not load (network/CDN blocked or file:// issue). Choose "My Anthropic API key" in the model list, or host this file online.');
-    return;
-  }
-
-  if (!cur()) { const c = { id: uid(), title: '', messages: [] }; chats.push(c); currentId = c.id; }
-  const chat = cur();
-
-  let content = text || 'Please analyze the attached file.';
-  let image = null, fileName = null;
-  if (attached) {
-    fileName = attached.name;
-    if (attached.type === 'text') content += `\n\n[Attached file: ${attached.name}]\n${attached.text}`;
-    else image = attached.dataUrl;
-  }
-
-  chat.messages.push({ role: 'user', content, shown: text, file: fileName });
-  if (!chat.title) chat.title = (text || fileName || 'New chat').slice(0, 40);
-  const aiMsg = { role: 'assistant', content: '' };
-  chat.messages.push(aiMsg);
-
-  input.value = ''; input.style.height = 'auto'; removeFile();
-  renderAll();
-
-  // streaming bubble = last bubble
-  const bubble = $('#messages').lastElementChild.querySelector('.md');
-  bubble.classList.add('typing');
-  setBusy(true); stopFlag = false;
-
-  const model = $('#modelSelect').value;
-  const opts = { stream: true, max_tokens: 8000 }; if (model && model !== '__key__') opts.model = model;
-  const history = chat.messages.slice(0, -1).slice(-14).map(m => ({ role: m.role, content: m.content }));
-
-  try {
-    let resp;
-    if (imgMode || /^\/img\s+/i.test(text)) {
-      if (typeof puter === 'undefined') throw new Error('Image engine (Puter) did not load. Check internet and reload.');
-      const p = text.replace(/^\/img\s+/i, '').trim() || 'a beautiful landscape';
-      const el = await puter.ai.txt2img(p);
-      aiMsg.img = el.src;
-      aiMsg.content = '🖼️ ' + p;
-      return;
-    }
-    if (useKey) {
-      resp = anthropicStream(history, image);
-    } else if (image) {
-      const transcript = history.slice(0, -1).map(m => (m.role === 'user' ? 'User: ' : 'Assistant: ') + m.content).join('\n\n');
-      const prompt = SYSTEM + (transcript ? '\n\nConversation so far:\n' + transcript : '') + '\n\nUser: ' + content;
-      resp = await puter.ai.chat(prompt, image, opts);
-    } else {
-      resp = await puter.ai.chat([{ role: 'system', content: SYSTEM }, ...history], opts);
-    }
-
-    let pending = false;
-    const paint = () => { pending = false; bubble.innerHTML = renderMd(aiMsg.content); scrollDown(false); };
-    if (resp && typeof resp[Symbol.asyncIterator] === 'function') {
-      for await (const part of resp) {
-        if (stopFlag) break;
-        if (part?.text) {
-          aiMsg.content += part.text;
-          if (!pending) { pending = true; requestAnimationFrame(paint); }
-        }
-      }
-    } else {
-      const c = resp?.message?.content;
-      aiMsg.content = typeof c === 'string' ? c : Array.isArray(c) ? c.map(x => x.text || '').join('') : String(resp?.text ?? resp ?? '');
-    }
-    if (!aiMsg.content.trim()) aiMsg.content = stopFlag ? '_(stopped)_' : '_(empty response — try another model from the list above)_';
-  } catch (err) {
-    aiMsg.content = (aiMsg.content ? aiMsg.content + '\n\n' : '') + '⚠️ **Error:** ' + errMsg(err) +
-      '\n\nTry: reload the page, pick another model, or sign in to Puter if a popup appeared (allow popups).';
-  } finally {
-    bubble.classList.remove('typing');
-    paintFinal(bubble, aiMsg);
-    if (aiMsg.content && !bubble.parentElement.querySelector('.actions')) bubble.parentElement.appendChild(actionsBar(aiMsg));
-    setBusy(false); stopFlag = false;
-    save(); renderList(); scrollDown(false);
-  }
-}
-
-/* ================= Init ================= */
-const ta = $('#input');
-ta.addEventListener('input', () => { ta.style.height = 'auto'; ta.style.height = Math.min(ta.scrollHeight, 192) + 'px'; });
-ta.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); send(); }
-});
-try { const m = localStorage.getItem(LS_MODEL); if (m !== null) $('#modelSelect').value = m; } catch {}
-$('#modelSelect').addEventListener('change', (e) => { try { localStorage.setItem(LS_MODEL, e.target.value); } catch {} });
-
-load();
-if (chats.length) currentId = chats[chats.length - 1].id;
-renderAll();
-
-// Startup self-check: tells you exactly what is missing
-[['puter', 'Puter AI engine'], ['marked', 'Markdown renderer'], ['DOMPurify', 'Sanitizer'], ['hljs', 'Code highlighter'], ['pdfjsLib', 'PDF reader'], ['mammoth', 'DOCX reader']]
-  .forEach(([k, label]) => { if (!window[k]) diag(label + ' failed to load (internet/CDN blocked?).'); });
-if (location.protocol === 'file:') diag('Opened as a local file. If the AI does not answer, upload this file to a host (Netlify Drop / GitHub Pages) or use the "My Anthropic API key" model option.');
-</script>
-</body>
-</html>
+D.k1=T("احسب سعر طلبك","Estimate your price","Estimez votre prix");D.k2=T("اختر المنصة والخدمة وحرّك المؤشر لمعرفة الثمن.","Pick a platform and service, then drag to see the price.","Choisissez plateforme et service, puis faites glisser.");D.kq=T("الكمية","Quantity","Quantité");
+let CS={p:"instagram",s:"",v:40};
+const cq=s=>Math.min(s.max,Math.max(s.min,Math.round(s.min*Math.pow(s.max/s.min,CS.v/100)/100)*100)),csv=()=>SV.find(x=>x.id==CS.s);
+function calc(){const el=$("#cb");if(!el)return;const list=SV.filter(x=>x.p==CS.p);if(!list.find(x=>x.id==CS.s))CS.s=list[0].id;
+el.innerHTML=`<div class="card calc"><div><label>${t("op")}</label><select id="cpl" onchange="CS.p=this.value;CS.s='';calc()">${Object.keys(PL).map(k=>`<option value="${k}" ${CS.p==k?"selected":""}>${cap(k)}</option>`).join("")}</select><label>${t("os")}</label><select onchange="CS.s=this.value;calc()">${list.map(x=>`<option value="${x.id}" ${CS.s==x.id?"selected":""}>${nm(x)}</option>`).join("")}</select><label>${t("kq")}</label><input type="range" id="crg" min="0" max="100" value="${CS.v}" oninput="CS.v=+this.value;cu()"><div class="rl"><span id="cmn"></span><span id="cmx"></span></div></div><div class="cr"><span class="f">${t("ot")}</span><b id="ctt"></b><span class="f" id="cqq"></span><a class="btn" onclick="openO(CS.p,CS.s,cq(csv()))">${t("order")}</a></div></div>`;cu()}
+function cu(){const s=csv(),q=cq(s);$("#ctt").textContent=mon(cost(s,q));$("#cqq").textContent=q.toLocaleString("en")+" × "+nm(s);$("#cmn").textContent=s.min.toLocaleString("en");$("#cmx").textContent=s.max.toLocaleString("en");$("#crg").style.background=`linear-gradient(90deg,var(--lime) ${CS.v}%,rgba(255,255,255,.12) ${CS.v}%)`}
+function mqf(){const n=Object.keys(PL).map(k=>`<span>${cap(k)}</span>`).join("");$("#mt").innerHTML=n+n}
+let IO;function rv(){if(!IO)IO=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");IO.unobserve(e.target);setTimeout(()=>e.target.style.setProperty("--d","0s"),1400)}}),{threshold:.12});
+document.querySelectorAll(".card,.hd").forEach(el=>{if(el.closest(".md")||el.classList.contains("rv"))return;el.classList.add("rv");el.style.setProperty("--d",Math.min([...el.parentNode.children].indexOf(el),6)*.07+"s");IO.observe(el)})}
+document.addEventListener("mousemove",e=>{const c=e.target.closest&&e.target.closest(".card");if(c){const r=c.getBoundingClientRect();c.style.setProperty("--mx",e.clientX-r.left+"px");c.style.setProperty("--my",e.clientY-r.top+"px")}});
+{const h=$(".hero"),k=$(".streaks");h.addEventListener("mousemove",e=>{const r=h.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;k.style.transform=`translate(${-x*26}px,${-y*18}px) scale(1.05)`});h.addEventListener("mouseleave",()=>k.style.transform="")}
+document.querySelectorAll(".lang button").forEach(b=>b.onclick=()=>{L=+b.dataset.l;try{localStorage.setItem("nx_l",LG[L])}catch(e){}paint()});
+$("#md").onclick=e=>{if(e.target.id=="md")closeO()};paint();
+</script></body></html>
